@@ -1,67 +1,39 @@
 import React from 'react';
 import Header from '../components/Header';
-import { categories } from '../data/mockData';
-import { colors } from '../utils/colors';
 import BackButton from '../components/BackButton';
+import { categoriesWithSubcategories } from '../data/categoryData';
+import { categoryPageStyles } from '../styles/categoryPageStyles';
 
 function CategoryPage({ onServiceSelect, onBack }) {
 
-  // Render sub-category item
   const renderSubCategoryItem = (subCategory) => {
     return (
       <div 
         key={subCategory.id} 
         className="subcategory-item" 
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '12px 16px',
-          borderBottom: '1px solid #f0f0f0',
-          cursor: 'pointer'
-        }}
+        style={categoryPageStyles.subCategoryItem}
         onClick={() => onServiceSelect && onServiceSelect(subCategory.id)}
       >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={categoryPageStyles.subCategoryContent}>
           <img 
             src={subCategory.icon} 
             alt={subCategory.title} 
-            style={{ 
-              width: '32px', 
-              height: '32px', 
-              marginRight: '12px',
-              objectFit: 'cover',
-              borderRadius: '50%'
-            }} 
+            style={categoryPageStyles.subCategoryIcon} 
           />
-          <span style={{ fontSize: '16px' }}>{subCategory.title}</span>
+          <span style={categoryPageStyles.subCategoryTitle}>{subCategory.title}</span>
         </div>
-        <i className="bi bi-chevron-right" style={{ color: colors.secondary }}></i>
+        <i className="bi bi-chevron-right" style={categoryPageStyles.arrowIcon}></i>
       </div>
     );
   };
 
-  // Render category section
   const renderCategorySection = (category) => {
     return (
       <div key={category.id} className="category-section mb-4">
-        <h2 
-          style={{ 
-            fontSize: '18px', 
-            fontWeight: '700', 
-            margin: '12px 16px', 
-            color: colors.darkText 
-          }}
-        >
+        <h2 style={categoryPageStyles.sectionTitle}>
           {category.title}
         </h2>
-        <div 
-          style={{ 
-            backgroundColor: '#fff', 
-            borderRadius: '8px',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
-          }}
-        >
+        <div style={categoryPageStyles.sectionContainer}>
           {category.subCategories.map(subCategory => renderSubCategoryItem(subCategory))}
         </div>
       </div>
@@ -69,17 +41,16 @@ function CategoryPage({ onServiceSelect, onBack }) {
   };
 
   return (
-    <div style={{ backgroundColor: colors.backgroundColor, minHeight: '100vh' }}>
-      <div style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
+    <div style={categoryPageStyles.container}>
+      <div style={categoryPageStyles.headerContainer}>
         <Header 
-          leftComponent={<BackButton onClick={onBack} />}
           onSearch={() => {}}
           placeholder="Kategori Ara"
         />
       </div>
 
-      <div className="container-fluid px-3 py-2">
-        {categories.map(category => renderCategorySection(category))}
+      <div style={categoryPageStyles.contentContainer}>
+        {categoriesWithSubcategories.map(category => renderCategorySection(category))}
       </div>
     </div>
   );

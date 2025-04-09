@@ -4,7 +4,7 @@ import BottomNav from './components/BottomNav'
 import { colors } from './utils/colors'
 import MessagesPage from './pages/MessagesPage'
 import HomePage from './pages/HomePage'
-import TasksPage from './pages/TasksPage'
+import ServicePage from './pages/ServicePage'
 import SettingsPage from './pages/SettingsPage'
 import CategoryPage from './pages/CategoryPage'
 import ServiceDetailPage from './pages/ServiceDetailPage'
@@ -76,7 +76,7 @@ function App() {
       case 'messages':
         return <MessagesPage />;
       case 'service':
-        return <TasksPage />;
+        return <ServicePage />;
       case 'settings':
         return <SettingsPage />;
       case 'category':

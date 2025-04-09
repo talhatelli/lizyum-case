@@ -80,23 +80,74 @@ export const featuredServices = [
   {
     id: 1,
     image: 'https://images.unsplash.com/photo-1581783898377-1c85bf937427?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-    price: '200 TL\'den başlayan fiyatlar...',
+    price: '200 TL\'den',
     title: 'Tamirat Servisi',
-    description: 'Profesyonel ekibimizle her türlü tamirat işleminizi kısa sürede tamamlıyoruz.'
+    description: 'Profesyonel ekibimizle her türlü tamirat işleminizi kısa sürede tamamlıyoruz.',
+    category: 3
   },
   {
     id: 2,
     image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-    price: '200 TL\'den başlayan fiyatlar...',
+    price: '250 TL\'den',
     title: 'Mutfak Servisi',
-    description: 'Mutfağınızdaki her türlü arıza ve tamirat işlemleri için profesyonel çözümler.'
+    description: 'Mutfağınızdaki her türlü arıza ve tamirat işlemleri için profesyonel çözümler.',
+    category: 3
   },
   {
     id: 3,
     image: 'https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-    price: '200 TL\'den başlayan fiyatlar...',
+    price: '150 TL\'den',
     title: 'Elektrik Servisi',
-    description: 'Elektrik tesisatı ve tamiri için hızlı ve güvenilir hizmet.'
+    description: 'Elektrik tesisatı ve tamiri için hızlı ve güvenilir hizmet.',
+    category: 6
+  },
+  {
+    id: 4,
+    image: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+    price: '300 TL\'den',
+    title: 'Ev Temizliği',
+    description: 'Detaylı ev temizliği için profesyonel temizlik hizmeti.',
+    category: 1
+  },
+  {
+    id: 5,
+    image: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+    price: '400 TL\'den',
+    title: 'Ofis Temizliği',
+    description: 'İşyerleriniz için düzenli ve detaylı temizlik hizmeti.',
+    category: 2
+  },
+  {
+    id: 6,
+    image: 'https://images.unsplash.com/photo-1584622650111-993a426bcf0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+    price: '350 TL\'den',
+    title: 'Boyama Hizmeti',
+    description: 'Evinizin iç ve dış cephe boya badana işlemleri.',
+    category: 4
+  },
+  {
+    id: 7,
+    image: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+    price: '180 TL\'den',
+    title: 'Tesisatçı',
+    description: 'Su tesisatı tamiri ve yeni tesisat kurulumu.',
+    category: 5
+  },
+  {
+    id: 8,
+    image: 'https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+    price: '450 TL\'den',
+    title: 'Nakliyat Hizmeti',
+    description: 'Ev ve ofis taşıma hizmetleri, güvenli ve hızlı nakliyat.',
+    category: 7
+  },
+  {
+    id: 9,
+    image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+    price: '200 TL\'den',
+    title: 'Bahçe Bakımı',
+    description: 'Bahçe düzenleme, çim biçme ve ağaç budama hizmetleri.',
+    category: 8
   }
 ];
 
@@ -157,46 +208,6 @@ export const companyDetails = {
   ],
   badge: "Mahallenin Muhtarı"
 };
-
-// Tasks for Tasks Page
-export const mockTasks = [
-  {
-    id: 1,
-    title: 'Design UI for mobile app',
-    description: 'Create wireframes and mockups for the new mobile application',
-    dueDate: '2023-05-15',
-    priority: 'high',
-    status: 'in-progress',
-    category: 'Design'
-  },
-  {
-    id: 2,
-    title: 'Implement login functionality',
-    description: 'Develop user authentication and authorization system',
-    dueDate: '2023-05-10',
-    priority: 'medium',
-    status: 'pending',
-    category: 'Development'
-  },
-  {
-    id: 3,
-    title: 'Test payment gateway',
-    description: 'Verify that payment processing works correctly',
-    dueDate: '2023-05-20',
-    priority: 'low',
-    status: 'completed',
-    category: 'Testing'
-  },
-  {
-    id: 4,
-    title: 'Update user documentation',
-    description: 'Revise user guide with new feature descriptions',
-    dueDate: '2023-05-25',
-    priority: 'medium',
-    status: 'pending',
-    category: 'Documentation'
-  }
-];
 
 // Chat Groups for Messages page
 export const chatGroups = [

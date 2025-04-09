@@ -1,42 +1,40 @@
 import React from 'react';
-import { colors } from '../utils/colors';
+import { chatMessageStyles } from '../styles/chatMessageStyles';
 
 function ChatMessage({ message, isOwn }) {
   return (
-    <div className={`d-flex mb-3 ${isOwn ? 'justify-content-end' : 'justify-content-start'}`}>
+    <div style={chatMessageStyles.container(isOwn)}>
       {!isOwn && (
-        <div className="me-2">
+        <div style={chatMessageStyles.avatarContainer}>
           <img 
             src={message.sender.avatar} 
             alt={message.sender.name}
             className="rounded-circle"
-            style={{ width: "35px", height: "35px", objectFit: "cover" }}
+            style={chatMessageStyles.avatar}
           />
         </div>
       )}
       <div 
-        className={`message-bubble px-3 py-2 rounded-4 ${isOwn ? 'text-white' : ''}`}
-        style={{ 
-          maxWidth: '75%',
-          backgroundColor: isOwn ? colors.activeTab : '#FFFFFF',
-          boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
-        }}
+        className={`message-bubble ${isOwn ? 'text-white' : ''}`}
+        style={chatMessageStyles.messageBubble(isOwn)}
       >
-        <p className="mb-1" style={{ fontSize: '14px' }}>{message.text}</p>
-        <div className="d-flex align-items-center justify-content-end">
-          <small 
-            className={isOwn ? 'text-white-50' : 'text-muted'} 
-            style={{ fontSize: '11px' }}
-          >
+        <p style={{
+          ...chatMessageStyles.messageText,
+          color: chatMessageStyles.messageText.color(isOwn)
+        }}>
+          {message.text}
+        </p>
+        <div style={chatMessageStyles.timeContainer}>
+          <small style={chatMessageStyles.timeText(isOwn)}>
             {message.time}
           </small>
           
           {isOwn && (
-            <span className="ms-1">
+            <span style={{ marginLeft: '4px' }}>
               {message.isRead ? (
-                <i className="bi bi-check2-all" style={{ fontSize: '12px', color: '#8de0fd' }}></i>
+                <i className="bi bi-check2-all" style={chatMessageStyles.readIndicator(true)}></i>
               ) : (
-                <i className="bi bi-check2" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)' }}></i>
+                <i className="bi bi-check2" style={chatMessageStyles.readIndicator(false)}></i>
               )}
             </span>
           )}

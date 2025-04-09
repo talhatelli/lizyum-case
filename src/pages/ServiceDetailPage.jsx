@@ -1,175 +1,120 @@
 import React, { useState } from 'react';
-import Header from '../components/Header';
-import { featuredServices } from '../data/mockData';
+import { getServiceDetailData } from '../data/serviceDetailData';
+import { getServiceDetailStyles } from '../styles/serviceDetailStyles';
+import { colors } from '../utils/colors';
 
 function ServiceDetailPage({ onBack }) {
   const [activeTab, setActiveTab] = useState('individual');
+  const data = getServiceDetailData();
+  const styles = getServiceDetailStyles(activeTab);
+
+  const filterServicesByTab = () => {
+    return data.featuredServices.filter(service => 
+      (activeTab === 'individual' && service.id <= 2) || 
+      (activeTab === 'corporate' && service.id > 2)
+    );
+  };
   
   return (
     <div className="service-detail-page">
-      <div className="custom-header bg-white p-3 d-flex align-items-center">
+      <div className="custom-header p-3 d-flex align-items-center">
         <button 
-          className="btn border-0 me-2 p-1" 
+          style={styles.backButton} 
           onClick={onBack}
-          style={{ backgroundColor: 'transparent' }}
+          aria-label="Geri"
         >
-          <i className="bi bi-arrow-left fs-5"></i>
+          <img src={data.icons.arrowBack} alt="Geri" width="24" height="24" />
         </button>
-        <h1 className="mb-0 fw-bold fs-5">Servis Detayı</h1>
+        <h1 className="mb-0 fw-bold fs-5">{data.serviceInfo.title}</h1>
       </div>
       
-      <div className="container-fluid p-0">
+      <div className="container-fluid p-0" style={styles.container}>
         <section className="featured-services-section mb-4">
           <div className="px-3 pt-2 pb-3">
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h2 className="section-title fw-bold mb-0 fs-4">
-                <span className="text-primary fw-bold">#</span> Öne Çıkanlar
+                <span className="text-primary fw-bold">{data.sections.featured.hashPrefix}</span> {data.sections.featured.title}
               </h2>
               
               <div className="tab-buttons">
-                <div className="btn-group rounded-pill" 
-                     style={{ 
-                       overflow: 'hidden', 
-                       border: '1px solid #E6E8EC',
-                       borderRadius: '29px',
-                       boxShadow: 'inset 0px 2px 4px rgba(0, 0, 0, 0.04)',
-                       backgroundColor: '#F9FAFB'
-                     }}>
+                <div className="btn-group rounded-pill" style={styles.tabContainer}>
                   <button 
                     type="button" 
                     onClick={() => setActiveTab('individual')}
-                    style={{ 
-                      backgroundColor: activeTab === 'individual' ? '#FFFFFF' : 'transparent', 
-                      color: '#3B3E45',
-                      borderRadius: '29px 0 0 29px',
-                      border: 'none',
-                      padding: '10px 24px',
-                      fontWeight: '500',
-                      fontSize: '14px',
-                      boxShadow: activeTab === 'individual' ? '0px 2px 4px rgba(0, 0, 0, 0.06)' : 'none',
-                      position: 'relative',
-                      zIndex: activeTab === 'individual' ? 2 : 1
-                    }}
+                    style={styles.tabButtonIndividual}
                   >
-                    Bireysel
+                    {data.tabs.individual}
                   </button>
                   <button 
                     type="button" 
                     onClick={() => setActiveTab('corporate')}
-                    style={{ 
-                      backgroundColor: activeTab === 'corporate' ? '#FFFFFF' : 'transparent', 
-                      color: '#3B3E45',
-                      borderRadius: '0 29px 29px 0',
-                      border: 'none',
-                      borderLeft: activeTab === 'corporate' ? 'none' : '1px solid #E6E8EC',
-                      padding: '10px 24px',
-                      fontWeight: '500',
-                      fontSize: '14px',
-                      boxShadow: activeTab === 'corporate' ? '0px 2px 4px rgba(0, 0, 0, 0.06)' : 'none',
-                      position: 'relative',
-                      zIndex: activeTab === 'corporate' ? 2 : 1
-                    }}
+                    style={styles.tabButtonCorporate}
                   >
-                    Kurumsal
+                    {data.tabs.corporate}
                   </button>
                 </div>
               </div>
             </div>
           </div>
           
-          <div className="d-flex overflow-auto pb-3 hide-scrollbar px-3" 
-               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {featuredServices
-              .filter(service => 
-                (activeTab === 'individual' && service.id <= 2) || 
-                (activeTab === 'corporate' && service.id > 2)
-              )
-              .map(service => (
-                <div 
-                  key={service.id} 
-                  className="me-3" 
-                  style={{ 
-                    minWidth: '275px', 
-                    maxWidth: '275px',
-                    flexShrink: 0 
-                  }}
-                >
-                  <div className="featured-card position-relative rounded-4 overflow-hidden shadow-sm">
-                    <img 
-                      src={service.image} 
-                      alt={service.title} 
-                      className="w-100" 
-                      style={{ height: '170px', objectFit: 'cover' }}
-                    />
-                    <div className="featured-overlay position-absolute bottom-0 start-0 w-100 p-3 text-white"
-                         style={{ background: 'linear-gradient(transparent, rgba(0,0,0,0.7))' }}>
-                      <p className="mb-1 small">{service.price}</p>
-                      <h5 className="mb-0 fs-5 fw-bold">{service.title}</h5>
-                    </div>
-                    <div className="arrow-icon position-absolute bottom-3 end-3 bg-white rounded-circle d-flex justify-content-center align-items-center"
-                         style={{ width: '32px', height: '32px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-                      <i className="bi bi-arrow-right"></i>
-                    </div>
+          <div className="d-flex overflow-auto pb-3 hide-scrollbar px-3" style={styles.featuredCardsContainer}>
+            {filterServicesByTab().map(service => (
+              <div key={service.id} style={styles.featuredCard}>
+                <div className="featured-card position-relative rounded-4 overflow-hidden shadow-sm" style={styles.cardContainer}>
+                  <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    style={styles.cardImage}
+                  />
+                  <div className="featured-overlay" style={styles.cardOverlay}>
+                    <p style={styles.cardPrice}>{service.price}</p>
+                    <h5 style={styles.cardTitle}>{service.title}</h5>
+                  </div>
+                  <div style={styles.arrowIcon}>
+                    <i className="bi bi-arrow-right"></i>
                   </div>
                 </div>
-              ))}
+              </div>
+            ))}
           </div>
         </section>
         
         <section className="service-details p-3">
-          <div className="card border-0 rounded-4 mb-4">
-            <div className="card-body p-3">
-              <h3 className="card-title fw-bold mb-3">Servis Hakkında</h3>
-              <p className="card-text text-muted">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit.
+          <div className="card" style={styles.infoCard}>
+            <div className="card-body" style={styles.infoCardBody}>
+              <h3 className="card-title" style={styles.infoCardTitle}>{data.sections.about.title}</h3>
+              <p className="card-text" style={styles.infoCardText}>
+                {data.serviceInfo.description}
               </p>
             </div>
           </div>
           
-          <div className="card border-0 rounded-4 mb-4">
-            <div className="card-body p-3">
-              <h3 className="card-title fw-bold mb-3">Servis Sağlayıcıları</h3>
+          <div className="card" style={styles.infoCard}>
+            <div className="card-body" style={styles.infoCardBody}>
+              <h3 className="card-title" style={styles.infoCardTitle}>{data.sections.providers.title}</h3>
               <div className="providers-list">
-                <div className="provider-item d-flex align-items-center mb-3">
-                  <img 
-                    src="https://randomuser.me/api/portraits/men/32.jpg" 
-                    alt="Provider" 
-                    className="rounded-circle me-3"
-                    style={{ width: '50px', height: '50px', objectFit: 'cover' }}
-                  />
-                  <div>
-                    <h6 className="mb-0 fw-bold">Ahmet Yılmaz</h6>
-                    <p className="mb-0 text-muted small">4.8 <i className="bi bi-star-fill text-warning"></i> (120 değerlendirme)</p>
+                {data.providers.map(provider => (
+                  <div key={provider.id} style={styles.providerItem}>
+                    <img 
+                      src={provider.avatar} 
+                      alt={provider.name} 
+                      style={styles.providerAvatar}
+                    />
+                    <div>
+                      <h6 style={styles.providerName}>{provider.name}</h6>
+                      <p style={styles.providerRating}>
+                        {provider.rating} <i className="bi bi-star-fill" style={styles.starIcon}></i> ({provider.reviewCount} değerlendirme)
+                      </p>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="provider-item d-flex align-items-center mb-3">
-                  <img 
-                    src="https://randomuser.me/api/portraits/women/44.jpg" 
-                    alt="Provider" 
-                    className="rounded-circle me-3"
-                    style={{ width: '50px', height: '50px', objectFit: 'cover' }}
-                  />
-                  <div>
-                    <h6 className="mb-0 fw-bold">Ayşe Demir</h6>
-                    <p className="mb-0 text-muted small">4.7 <i className="bi bi-star-fill text-warning"></i> (98 değerlendirme)</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
       </div>
       
-      <style jsx>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
+      <style dangerouslySetInnerHTML={{ __html: styles.hideScrollbarStyle }} />
     </div>
   );
 }

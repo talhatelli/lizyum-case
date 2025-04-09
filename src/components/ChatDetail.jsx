@@ -1,72 +1,32 @@
-import React, { useState } from 'react';
-import { colors } from '../utils/colors';
+import React, { useState, useEffect } from 'react';
 import ChatMessage from './ChatMessage';
+import { chatStyles } from '../styles/chatStyles';
+import { messageGroups as defaultMessageGroups } from '../data/chatData';
 
 function ChatDetail({ chat, onBack }) {
   const [newMessage, setNewMessage] = useState('');
+  const [messageGroups, setMessageGroups] = useState([]);
   
-  const messageGroups = [
-    {
-      date: 'Bugün',
-      messages: [
-        {
-          id: 1,
-          text: 'Merhaba, hizmetiniz hakkında bilgi almak istiyorum',
-          time: '09:30',
-          sender: {
-            id: chat.id,
-            name: chat.name,
-            avatar: chat.avatar
-          },
-          isRead: true
-        },
-        {
-          id: 2,
-          text: 'Merhaba, tabii ki! Hangi hizmet hakkında bilgi almak istersiniz?',
-          time: '09:32',
-          sender: {
-            id: 'me',
-            name: 'Ben',
-            avatar: 'https://randomuser.me/api/portraits/women/65.jpg'
-          },
-          isRead: true
-        },
-        {
-          id: 3,
-          text: 'Ev temizliği hizmetiniz hakkında fiyat bilgisi alabilir miyim?',
-          time: '09:35',
-          sender: {
-            id: chat.id,
-            name: chat.name,
-            avatar: chat.avatar
-          },
-          isRead: true
-        },
-        {
-          id: 4,
-          text: 'Tabii ki, 2+1 ev için 350 TL, 3+1 ev için 450 TL fiyatlarımız var. Detaylı bilgi için web sitemizi de inceleyebilirsiniz.',
-          time: '09:40',
-          sender: {
-            id: 'me',
-            name: 'Ben',
-            avatar: 'https://randomuser.me/api/portraits/women/65.jpg'
-          },
-          isRead: true
-        },
-        {
-          id: 5,
-          text: 'Teşekkürler, bu hafta için randevu alabilir miyim?',
-          time: '09:41',
-          sender: {
-            id: chat.id,
-            name: chat.name,
-            avatar: chat.avatar
-          },
-          isRead: false
+  useEffect(() => {
+    const updatedGroups = defaultMessageGroups.map(group => ({
+      ...group,
+      messages: group.messages.map(message => {
+        if (message.sender.id === 'user') {
+          return {
+            ...message,
+            sender: {
+              id: chat.id,
+              name: chat.name,
+              avatar: chat.avatar
+            }
+          };
         }
-      ]
-    }
-  ];
+        return message;
+      })
+    }));
+    
+    setMessageGroups(updatedGroups);
+  }, [chat]);
 
   const handleSend = () => {
     if (newMessage.trim() === '') return;
@@ -74,13 +34,12 @@ function ChatDetail({ chat, onBack }) {
   };
 
   return (
-    <div className="chat-detail d-flex flex-column" style={{ height: '100vh', backgroundColor: '#F4F5F6' }}>
-      <div className="chat-header px-3 py-3 d-flex align-items-center bg-white" 
-           style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
+    <div className="chat-detail d-flex flex-column" style={chatStyles.container}>
+      <div className="chat-header px-3 py-3 d-flex align-items-center bg-white" style={chatStyles.header}>
         <button 
           className="btn border-0 me-2 p-1" 
           onClick={onBack}
-          style={{ backgroundColor: 'transparent' }}
+          style={chatStyles.backButton}
         >
           <i className="bi bi-arrow-left fs-5"></i>
         </button>
@@ -88,27 +47,27 @@ function ChatDetail({ chat, onBack }) {
           src={chat.avatar} 
           alt={chat.name} 
           className="rounded-circle me-3"
-          style={{ width: "45px", height: "45px", objectFit: "cover" }}
+          style={chatStyles.avatar}
         />
         <div className="flex-grow-1">
           <h6 className="mb-0 fw-bold">{chat.name}</h6>
           <small className="text-muted">{chat.isOnline ? 'Çevrimiçi' : 'Son görülme: Bugün 08:30'}</small>
         </div>
         <div className="d-flex">
-          <button className="btn border-0 p-2" style={{ backgroundColor: 'transparent' }}>
+          <button className="btn border-0 p-2" style={chatStyles.actionButton}>
             <i className="bi bi-telephone"></i>
           </button>
-          <button className="btn border-0 p-2" style={{ backgroundColor: 'transparent' }}>
+          <button className="btn border-0 p-2" style={chatStyles.actionButton}>
             <i className="bi bi-three-dots-vertical"></i>
           </button>
         </div>
       </div>
 
-      <div className="chat-messages p-3 flex-grow-1" style={{ overflowY: 'auto', backgroundColor: '#F4F5F6' }}>
+      <div className="chat-messages p-3 flex-grow-1" style={chatStyles.messageContainer}>
         {messageGroups.map((group, groupIndex) => (
           <div key={groupIndex} className="message-group mb-4">
             <div className="text-center mb-3">
-              <small className="text-muted bg-white px-3 py-1 rounded-pill shadow-sm">{group.date}</small>
+              <small style={chatStyles.datePill}>{group.date}</small>
             </div>
             
             {group.messages.map((message) => (
@@ -122,8 +81,8 @@ function ChatDetail({ chat, onBack }) {
         ))}
       </div>
 
-      <div className="message-input p-2 d-flex align-items-center bg-white" style={{ boxShadow: '0 -1px 3px rgba(0,0,0,0.1)' }}>
-        <button className="btn border-0 p-1 me-2" style={{ backgroundColor: 'transparent' }}>
+      <div className="message-input p-2 d-flex align-items-center bg-white" style={chatStyles.inputContainer}>
+        <button className="btn border-0 p-1 me-2" style={chatStyles.iconButton}>
           <i className="bi bi-plus-circle fs-5 text-muted"></i>
         </button>
         <div className="input-group flex-grow-1">
@@ -133,20 +92,20 @@ function ChatDetail({ chat, onBack }) {
             placeholder="Mesaj yazın..."
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            style={{ backgroundColor: '#F5F5F5' }}
+            style={chatStyles.textInput}
           />
         </div>
         {newMessage.trim() ? (
           <button 
             className="btn border-0 p-1 ms-2" 
             onClick={handleSend}
-            style={{ backgroundColor: 'transparent' }}
+            style={chatStyles.iconButton}
           >
-            <i className="bi bi-send-fill" style={{ color: colors.activeTab }}></i>
+            <i className="bi bi-send-fill" style={chatStyles.sendIcon}></i>
           </button>
         ) : (
-          <button className="btn border-0 p-1 ms-2" style={{ backgroundColor: 'transparent' }}>
-            <i className="bi bi-mic fs-5 text-muted"></i>
+          <button className="btn border-0 p-1 ms-2" style={chatStyles.iconButton}>
+            <i className="bi bi-mic fs-5" style={chatStyles.micIcon}></i>
           </button>
         )}
       </div>

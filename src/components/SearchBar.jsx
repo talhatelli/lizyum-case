@@ -1,50 +1,35 @@
 import React from 'react';
-import { colors } from '../utils/colors';
+import { searchBarStyles } from '../styles/searchBarStyles';
+import { searchBarDefaults } from '../data/searchBarData';
+import searchIcon from '../assets/search.svg';
+import filterIcon from '../assets/proicons_filter.svg';
 
 function SearchBar({ 
-  placeholder = "Aramak İstediğiniz Hizmeti Yazın", 
+  placeholder = searchBarDefaults.defaultPlaceholder, 
   value = "", 
   onChange = () => {}, 
-  backgroundColor = colors.white,
-  iconBackgroundColor = colors.lightBlue,
-  withFilter = true,
+  backgroundColor = searchBarDefaults.defaultBackgroundColor,
+  iconBackgroundColor = searchBarDefaults.defaultIconBackgroundColor,
+  withFilter = searchBarDefaults.defaultWithFilter,
   containerClassName = ""
 }) {
   return (
     <div className={`search-container ${containerClassName}`}>
-      <div className="bg-white d-flex align-items-center p-1" style={{ borderRadius: '10px', backgroundColor }}>
-        <div className="search-icon ms-1 me-2" style={{
-          width: "40px",
-          height: "40px",
-          borderRadius: '50%',
-          backgroundColor: iconBackgroundColor,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexShrink: 0
-        }}>
-          <i className="bi bi-search text-dark"></i>
+      <div className="bg-white d-flex align-items-center p-1" style={searchBarStyles.container(backgroundColor)}>
+        <div className="search-icon ms-1 me-2" style={searchBarStyles.iconContainer(iconBackgroundColor)}>
+          <img src={searchIcon} alt="Search" />
         </div>
         <input 
           type="text" 
           className="form-control border-0 shadow-none bg-transparent p-1"
           placeholder={placeholder}
-          style={{ boxShadow: 'none' }}
+          style={searchBarStyles.input}
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
         {withFilter && (
-          <div className="filter-icon me-1" style={{
-            width: "40px",
-            height: "40px",
-            borderRadius: '50%',
-            backgroundColor: iconBackgroundColor,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexShrink: 0
-          }}>
-            <i className="bi bi-filter text-dark"></i>
+          <div className="filter-icon me-1" style={searchBarStyles.iconContainer(iconBackgroundColor)}>
+            <img src={filterIcon} alt="Filter" />
           </div>
         )}
       </div>

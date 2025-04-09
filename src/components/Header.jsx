@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { colors } from '../utils/colors';
 import SearchBar from './SearchBar';
+import { headerStyles } from '../styles/headerStyles';
+import { navigationLinks, profileInfo, placeholderText } from '../data/headerData';
 
 function Header({ onSearch, placeholder }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -12,63 +13,47 @@ function Header({ onSearch, placeholder }) {
     }
   };
   
-  const headerGradientStyle = {
-    background: 'linear-gradient(to bottom, #AEC8E9, #E5EEFF)',
-    width: '100%'
-  };
-  
   return (
-    <div className="header-container mb-3" style={headerGradientStyle}>
-      <div className="d-flex justify-content-between align-items-center d-md-none px-3 py-3" style={{ background: 'transparent' }}>
+    <div className="header-container mb-3" style={headerStyles.headerGradient}>
+      <div className="d-flex justify-content-between align-items-center d-md-none px-3 py-3" style={headerStyles.mobileHeaderContainer}>
         <div>
-          <h1 style={{ 
-            fontSize: '32px', 
-            fontWeight: 'bold', 
-            marginBottom: '4px',
-            color: colors.darkText
-          }}>Merhaba!</h1>
-          <p style={{ 
-            color: colors.secondaryText, 
-            marginBottom: 0,
-            fontSize: '16px'
-          }}>Lizyum'a Hoşgeldiniz</p>
+          <h1 style={headerStyles.title}>Merhaba!</h1>
+          <p style={headerStyles.subtitle}>Lizyum'a Hoşgeldiniz</p>
         </div>
         <div className="profile-picture">
           <img 
-            src="https://randomuser.me/api/portraits/women/65.jpg" 
+            src={profileInfo.avatar} 
             alt="Profile" 
             className="rounded-circle border border-white"
-            style={{ width: "46px", height: "46px", objectFit: "cover" }}
+            style={headerStyles.mobileProfilePicture}
           />
         </div>
       </div>
       
-      <div className="px-3 pb-3 d-md-none" style={{ background: 'transparent' }}>
+      <div className="px-3 pb-3 d-md-none" style={headerStyles.mobileSearchContainer}>
         <SearchBar 
           value={searchTerm}
           onChange={handleSearch}
           containerClassName="mt-2"
-          placeholder={placeholder || "Aramak İstediğiniz Hizmeti Yazın"}
+          placeholder={placeholder || placeholderText}
         />
       </div>
       
-      <div className="d-none d-md-flex flex-column w-100" style={{ background: 'transparent' }}>
+      <div className="d-none d-md-flex flex-column w-100" style={headerStyles.desktopHeaderContainer}>
         <div className="d-flex align-items-center justify-content-between w-100 py-2 px-3">
           <div className="d-flex align-items-center">
             <h1 className="fs-4 fw-bold mb-0 me-4">Lizyum</h1>
             <ul className="nav">
-              <li className="nav-item">
-                <a className="nav-link active fw-medium" href="#">Ana Sayfa</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Hizmetler</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Hakkımızda</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">İletişim</a>
-              </li>
+              {navigationLinks.map(link => (
+                <li className="nav-item" key={link.id}>
+                  <a 
+                    className={`nav-link ${link.isActive ? 'active fw-medium' : ''}`} 
+                    href={link.url}
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="d-flex align-items-center">
@@ -76,10 +61,10 @@ function Header({ onSearch, placeholder }) {
             <a href="#" className="btn btn-sm btn-primary">Kayıt Ol</a>
             <div className="profile-picture ms-3">
               <img 
-                src="https://randomuser.me/api/portraits/women/65.jpg" 
+                src={profileInfo.avatar} 
                 alt="Profile" 
                 className="rounded-circle border border-white border-2"
-                style={{ width: "40px", height: "40px", objectFit: "cover" }}
+                style={headerStyles.desktopProfilePicture}
               />
             </div>
           </div>
@@ -88,7 +73,7 @@ function Header({ onSearch, placeholder }) {
           <SearchBar 
             value={searchTerm}
             onChange={handleSearch}
-            placeholder={placeholder || "Aramak İstediğiniz Hizmeti Yazın"}
+            placeholder={placeholder || placeholderText}
           />
         </div>
       </div>
