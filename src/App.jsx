@@ -18,38 +18,31 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
 
-  // Handle service detail navigation
   const handleServiceDetail = (serviceId) => {
     setActivePage('serviceDetail');
   };
 
-  // Handle company detail navigation
   const handleCompanyDetail = (companyId) => {
     setSelectedCompanyId(companyId);
     setActivePage('companyDetail');
   };
 
-  // Handle back navigation
   const handleBackToHome = () => {
     setActivePage('home');
   };
 
-  // Handle back to search results
   const handleBackToSearch = () => {
     setActivePage('searchResults');
   };
   
-  // Handle reservation success
   const handleReservationSuccess = () => {
     setActivePage('reservationSuccess');
   };
   
-  // Handle view reservation details
   const handleViewReservationDetails = () => {
     setActivePage('companyDetail');
   };
 
-  // Handle search functionality
   const handleSearch = (term) => {
     if (term.trim()) {
       setSearchTerm(term);
@@ -57,9 +50,7 @@ function App() {
     }
   };
 
-  // Content for the body section based on active tab and page
   const renderBodyContent = () => {
-    // First check if we're in a specific page that overrides the tab navigation
     if (activePage === 'serviceDetail') {
       return <ServiceDetailPage onBack={handleBackToHome} />;
     } else if (activePage === 'companyDetail') {
@@ -81,7 +72,6 @@ function App() {
             />;
     }
 
-    // Otherwise use the tab-based navigation
     switch(activeTab) {
       case 'messages':
         return <MessagesPage />;
@@ -98,8 +88,7 @@ function App() {
   };
 
   return (
-    <div className="app-wrapper d-flex flex-column vh-100 vw-100 p-0 m-0" style={{ overflow: 'hidden' }}>
-      {/* BODY */}
+    <div className="app-wrapper d-flex flex-column vh-100 p-0 m-0" style={{ overflow: 'hidden', width: '100%', maxWidth: '100%' }}>
       <main className="app-body flex-grow-1" style={{ 
         backgroundColor: activeTab === 'messages' ? '#F4F5F6' : 
                         activePage === 'reservationSuccess' ? '#FFFFFF' : 
@@ -109,8 +98,6 @@ function App() {
         {renderBodyContent()}
       </main>
       
-      {/* FOOTER */}
-      {/* Hide BottomNav when on CompanyDetailPage or ReservationSuccessPage */}
       {(activePage !== 'companyDetail' && activePage !== 'reservationSuccess') && (
         <footer className="app-footer">
           <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />

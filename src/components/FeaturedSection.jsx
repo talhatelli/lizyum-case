@@ -4,16 +4,13 @@ import arrowIcon from '../assets/arrow.svg';
 function FeaturedSection({ searchTerm = '', onServiceSelect }) {
   const [activeTab, setActiveTab] = useState('individual');
 
-  const featuredItems = [
-    {
-      id: 2,
+  const featuredItems = [ {
+      id: 6,
       image: 'https://s3-alpha-sig.figma.com/img/f50e/d396/8acc9477cf1e875deee44ed90f9f5d25?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=D19emqvdiGU8Zj1Rfg1rzu6MKGLor27feKPx4~VzL5yFuR6A2UAppoDRwWdd~-D4eccnp2nh3TI81t5rfrjJ2wepMrthj0Z7IhCl8zyYGcuA7RYFOdwLDDscn3KNL~LD9uj5cH2Z7njGNFRL3vMtrBMiavwJSMJrQ6laHDH4RPAnd9OY36Ha~D9EnWbLXlxuaJjtRmcip2492atnS7Ak~Pq4TFYJxGCwKTc10BoC1xbPi1ZZHXOlhjujgyHNUtOEJMN2I3ny5ShYpzesX5O5rFI3ziRSatapsPpAMPx6tkOZiuhyFQhPjKqV8QZp6R~8sKHmD4-t~UZClp4InlLhCQ__',
       price: '200 TL\'den başlayan fiyatlar...',
-      title: 'Mutfak Servisi',
+      title: 'Tamirat Servisi',
       category: 'individual'
     },
-
-
     {
       id: 1,
       image: 'https://s3-alpha-sig.figma.com/img/1105/47b2/740fad2ea4836b5b0831b6f3b8cb9504?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=tSi6wMA-l4~OC8Og~GAMrq1q7gwupQyXDggompbMBO7iGiCt64SvIh0sr94w3XW~WHs4gTxFZEYxK4lplSTTPKcF2MmwZoP7OCV5zx3VNgujODAJ5sTF0Un6pEVAuw2--C8-AXi4Y0zOzt2c57LxBKpp16DXz9V3K0UOn8~LnP1v0EaoJ2ZKsfdk-7Gjske75CDpXOVTRI3uz-3-etSduH~XC69MSlLhY2ynf4mILKHBetW9Ty6pmIkTl0m7WU9SX1xzN6geDEH9pBade0PPGIBga84~Qzo16vIIP7XFmAU3l2eNWxEWYRyRg4YDaOOKDoBlA7iSqQV5KCvzYbQX9w__',
@@ -29,19 +26,12 @@ function FeaturedSection({ searchTerm = '', onServiceSelect }) {
       category: 'individual'
     },
     {
-      id: 3,
-      image: 'https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      price: '200 TL\'den başlayan fiyatlar...',
-      title: 'Elektrik Servisi',
-      category: 'corporate'
-    },
-    {
       id: 4,
-      image: 'https://images.unsplash.com/photo-1521783988139-89397d761dce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+      image: 'https://s3-alpha-sig.figma.com/img/f50e/d396/8acc9477cf1e875deee44ed90f9f5d25?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=D19emqvdiGU8Zj1Rfg1rzu6MKGLor27feKPx4~VzL5yFuR6A2UAppoDRwWdd~-D4eccnp2nh3TI81t5rfrjJ2wepMrthj0Z7IhCl8zyYGcuA7RYFOdwLDDscn3KNL~LD9uj5cH2Z7njGNFRL3vMtrBMiavwJSMJrQ6laHDH4RPAnd9OY36Ha~D9EnWbLXlxuaJjtRmcip2492atnS7Ak~Pq4TFYJxGCwKTc10BoC1xbPi1ZZHXOlhjujgyHNUtOEJMN2I3ny5ShYpzesX5O5rFI3ziRSatapsPpAMPx6tkOZiuhyFQhPjKqV8QZp6R~8sKHmD4-t~UZClp4InlLhCQ__',
       price: '200 TL\'den başlayan fiyatlar...',
-      title: 'Tesisatçı',
-      category: 'corporate'
-    }
+      title: 'Tamirat Servisi',
+      category: 'individual'
+    },
   ];
 
   // Handle service item click
@@ -158,7 +148,7 @@ function FeaturedSection({ searchTerm = '', onServiceSelect }) {
       ) : (
         <div className="featured-grid">
           {/* Horizontal scrollable container for mobile */}
-          <div className="d-flex overflow-auto pb-2 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <div className="d-md-none d-flex overflow-auto pb-2 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {filteredItems.map(item => (
               <div 
                 key={item.id} 
