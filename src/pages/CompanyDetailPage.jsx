@@ -8,10 +8,9 @@ import ribbonIcon from '../assets/gaming-Ribbon-First--Streamline-Ultimate.svg';
 import { colors } from '../utils/colors';
 
 function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
-  const [activeTab, setActiveTab] = useState('company'); // Default active tab
+  const [activeTab, setActiveTab] = useState('company');
   const [isWebView, setIsWebView] = useState(false);
   
-  // Responsive screen detection
   useEffect(() => {
     const checkScreenSize = () => {
       setIsWebView(window.innerWidth > 768);
@@ -25,7 +24,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     };
   }, []);
   
-  // Mock data for the company details
   const company = {
     id: companyId || 1,
     name: "Lorem Ipsum Temizlik",
@@ -49,7 +47,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     badge: "Mahallenin Muhtarı"
   };
 
-  // Action button style for Mesaj At and Randevu Al
   const actionButtonStyle = {
     width: 118,
     height: 40,
@@ -68,7 +65,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     whiteSpace: 'nowrap'
   };
 
-  // Text style for the buttons
   const buttonTextStyle = {
     fontWeight: 600,
     fontSize: '14px',
@@ -77,7 +73,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     color: '#1570EF'
   };
 
-  // Header için gradient arka plan stili
   const headerGradientStyle = {
     background: 'linear-gradient(to bottom, #AEC8E9, #E5EEFF)',
     width: '100%',
@@ -93,7 +88,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     })
   };
 
-  // Geri buton stil
   const backButtonStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -116,7 +110,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     })
   };
 
-  // Card stili
   const cardStyle = {
     width: isWebView ? '600px' : '351px',
     maxWidth: '100%',
@@ -134,14 +127,12 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     })
   };
 
-  // Badge stili
   const badgeStyle = {
     display: 'flex',
     alignItems: 'center',
     marginTop: '8px'
   };
 
-  // Badge text stili
   const badgeTextStyle = {
     fontWeight: 400,
     fontSize: '15px',
@@ -150,7 +141,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     color: '#363A33'
   };
   
-  // Tab container style
   const tabContainerStyle = {
     display: 'flex',
     justifyContent: 'space-between',
@@ -167,7 +157,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     })
   };
   
-  // Active tab style
   const activeTabStyle = {
     flex: 1,
     textAlign: 'center',
@@ -185,7 +174,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     whiteSpace: 'nowrap',
   };
   
-  // Inactive tab style
   const inactiveTabStyle = {
     flex: 1,
     textAlign: 'center',
@@ -203,7 +191,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     whiteSpace: 'nowrap',
   };
   
-  // Contact card style
   const contactCardStyle = {
     borderRadius: '10px',
     borderWidth: '1px',
@@ -213,7 +200,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     background: '#FFFFFF80 50%',
   };
   
-  // Services card style
   const servicesCardStyle = {
     width: 351,
     height: 154,
@@ -233,7 +219,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     })
   };
   
-  // About card style - using the same dimensions and styling
   const aboutCardStyle = {
     width: 351,
     height: 134,
@@ -254,7 +239,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     })
   };
   
-  // Service item style
   const serviceItemStyle = {
     fontSize: '12px',
     fontWeight: 400,
@@ -271,7 +255,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     })
   };
 
-  // Web content wrapper style
   const webContentStyle = {
     width: '100%',
     padding: '24px 0',
@@ -286,18 +269,13 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     gridColumn: 'span 4',
   };
 
-  // Function to handle reservation submission
   const handleReservation = () => {
-    // Here we would normally process the reservation with an API call
-    // For now, we'll just trigger the success page
     if (onReservationSuccess) {
       onReservationSuccess();
     }
   };
 
-  // Render tab content based on active tab
   const renderTabContent = () => {
-    // For web view - combined layout
     if (isWebView) {
       return (
         <div style={webContentStyle}>
@@ -337,9 +315,7 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
                 </div>
               </div>
             ) : (
-              // Default company tab - alt alta düzenlenmiş
               <div className="company-info-content py-3">
-                {/* İletişim kartı ilk sırada */}
                 <div style={contactCardStyle} className="mb-4">
                   <div className="d-flex align-items-center mb-3">
                     <div style={{ width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -372,7 +348,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
                   </div>
                 </div>
 
-                {/* Hizmetler ikinci sırada */}
                 <div style={servicesCardStyle} className="mb-4">
                   <h3 className="mb-3">Hizmetler</h3>
                   <div>
@@ -398,7 +373,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
                   </div>
                 </div>
 
-                {/* Hakkında en son sırada */}
                 <div style={aboutCardStyle}>
                   <h3 className="mb-3">Hakkında</h3>
                   <p style={{
@@ -414,14 +388,11 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
       );
     }
     
-    // Mobile view - switchable tabs
     switch(activeTab) {
       case 'company':
         return (
           <div className="container-fluid px-3 py-3" style={{ backgroundColor: colors.backgroundColor, minHeight: 'calc(100vh - 180px)'}}>
-            {/* Contact Information Card */}
             <div style={contactCardStyle}>
-              {/* Address with icon */}
               <div className="d-flex align-items-center">
                 <div style={{ width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <i className="bi bi-geo-alt" style={{ fontSize: '24px', color: '#667085' }}></i>
@@ -431,7 +402,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
                 </span>
               </div>
               
-              {/* Email with icon */}
               <div className="d-flex align-items-center">
                 <div style={{ width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <i className="bi bi-question-circle" style={{ fontSize: '24px', color: '#667085' }}></i>
@@ -441,15 +411,12 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
                 </a>
               </div>
               
-              {/* Action Buttons */}
               <div className="d-flex gap-3 mt-2">
-                {/* Message button */}
                 <button style={actionButtonStyle}>
                   <img src={messageSentIcon} alt="Message" className="me-2" style={{ width: '20px', height: '20px' }} />
                   <span style={buttonTextStyle}>Mesaj At</span>
                 </button>
                 
-                {/* Appointment button */}
                 <button 
                   style={actionButtonStyle}
                   onClick={handleReservation}
@@ -460,7 +427,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
               </div>
             </div>
             
-            {/* Company Info Section */}
             <section className="company-info-section mb-3">
               <div style={servicesCardStyle}>
                 <h3 style={{ 
@@ -553,7 +519,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
     }
   };
 
-  // Web view company header info
   const renderWebCompanyInfo = () => {
     return (
       <div className="d-flex justify-content-between align-items-center" style={{ width: '100%' }}>
@@ -593,9 +558,7 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
 
   return (
     <div className="company-detail-page">
-      {/* Custom Gradient Header */}
       <div style={headerGradientStyle}>
-        {/* Back button with specified styles */}
         <button 
           style={backButtonStyle} 
           onClick={onBack}
@@ -605,15 +568,12 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
         </button>
         
         {isWebView ? (
-          /* Web View Company Profile */
           <div style={{ width: '80%', maxWidth: '1100px', padding: '0 24px' }}>
             {renderWebCompanyInfo()}
           </div>
         ) : (
-          /* Mobile View Company Profile in Header */
           <div style={cardStyle}>
             <div className="d-flex">
-              {/* Company image */}
               <div className="me-3" style={{ flexShrink: 0 }}>
                 <img 
                   src={company.image} 
@@ -627,7 +587,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
                 />
               </div>
               
-              {/* Company name and rating */}
               <div>
                 <h2 style={{ 
                   fontSize: '24px', 
@@ -637,7 +596,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
                 }}>{company.name}</h2>
                 
                 <div className="d-flex align-items-center">
-                  {/* Rating number */}
                   <div style={{ 
                     fontSize: '18px', 
                     fontWeight: '500',
@@ -645,18 +603,15 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
                     color: '#333'
                   }}>{company.rating}</div>
                   
-                  {/* Stars */}
                   <div className="d-flex me-1">
                     {Array(5).fill(0).map((_, index) => (
                       <span key={index} style={{ color: index < Math.floor(company.rating) ? '#FFBA0A' : '#D9D9D9', fontSize: '18px' }}>★</span>
                     ))}
                   </div>
                   
-                  {/* Review count */}
                   <span style={{ color: '#2483F0', fontSize: '14px' }}>({company.reviewCount} değerlendirme)</span>
                 </div>
                 
-                {/* Badge */}
                 <div style={badgeStyle}>
                   <img src={ribbonIcon} alt="Badge" width="16" height="16" className="me-1" />
                   <span style={badgeTextStyle}>{company.badge}</span>
@@ -667,7 +622,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
         )}
       </div>
       
-      {/* Tabs Navigation */}
       <div style={{backgroundColor: colors.backgroundColor}}>
         <div style={tabContainerStyle}>
           <div 
@@ -691,7 +645,6 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
         </div>
       </div>
       
-      {/* Render tab content */}
       {renderTabContent()}
     </div>
   );

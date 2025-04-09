@@ -20,21 +20,18 @@ body {
   min-height: 100vh;
 }
 
-/* Mobile specific styles */
 @media (max-width: 767px) {
   body {
     background-color: #edf2ff;
   }
 }
 
-/* Desktop specific styles */
 @media (min-width: 768px) {
   body {
     background-color: #f8f9fa;
   }
 }
 
-/* Custom colors for Bootstrap overrides */
 .bg-primary-light {
   background-color: #edf2ff;
 }
@@ -56,7 +53,6 @@ body {
   color: #4169e1 !important;
 }
 
-/* Rounded elements */
 .rounded-pill {
   border-radius: 50px !important;
 }
@@ -65,7 +61,6 @@ body {
   border-radius: 50% !important;
 }
 
-/* Better typography */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
@@ -78,14 +73,12 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.25rem !important;
 }
 
-/* Remove outline on button focus */
 button:focus, 
 input:focus {
   outline: none !important;
   box-shadow: none !important;
 }
 
-/* Fix for Bootstrap form control */
 .form-control:focus {
   box-shadow: none !important;
   border-color: transparent !important;

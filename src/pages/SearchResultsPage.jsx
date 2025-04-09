@@ -1,45 +1,11 @@
 import React from 'react';
 import Header from '../components/Header';
 import { colors } from '../utils/colors';
-import cleaningImage from '../assets/Image/clean-image.jpeg';
 import messageSentIcon from '../assets/icon-park-solid_message-sent.svg';
 import dotsMenuIcon from '../assets/entypo_dots-three-vertical.svg';
+import { searchResults } from '../data/mockData';
 
 function SearchResultsPage({ searchTerm = "Temizlik Şirketi", onBack, onServiceSelect }) {
-  // Dummy data to display search results
-  const searchResults = [
-    {
-      id: 1,
-      name: "Lorem Ipsum Temizlik",
-      rating: 4.0,
-      reviewCount: 200,
-      price: "₺",
-      amount: "500",
-      description: "den başlayan fiyatlarla",
-      image: cleaningImage
-    },
-    {
-      id: 2,
-      name: "Lorem Ipsum Temizlik",
-      rating: 4.0,
-      reviewCount: 200,
-      price: "₺",
-      amount: "500",
-      description: "den başlayan fiyatlarla",
-      image: cleaningImage
-    },
-    {
-      id: 3,
-      name: "Lorem Ipsum Temizlik",
-      rating: 4.0,
-      reviewCount: 200,
-      price: "₺",
-      amount: "500",
-      description: "den başlayan fiyatlarla",
-      image: cleaningImage
-    }
-  ];
-
   // Card styling based on the provided CSS
   const cardStyle = {
     borderRadius: '10px',
@@ -118,16 +84,12 @@ function SearchResultsPage({ searchTerm = "Temizlik Şirketi", onBack, onService
             style={cardStyle}
             onClick={() => handleCardClick(result.id)}
           >
-            {/* Menu icon */}
             <div style={menuIconStyle} onClick={handleMenuClick}>
               <img src={dotsMenuIcon} alt="Menu" width="20" height="20" />
             </div>
             
-            {/* Main card layout */}
             <div style={{ paddingRight: '15px' }}>
-              {/* Top row: Image, title, and menu */}
               <div className="d-flex mb-2">
-                {/* Service image */}
                 <div className="me-3" style={{ flexShrink: 0 }}>
                   <img 
                     src={result.image} 
@@ -141,7 +103,6 @@ function SearchResultsPage({ searchTerm = "Temizlik Şirketi", onBack, onService
                   />
                 </div>
                 
-                {/* Service name and rating */}
                 <div>
                   <h5 style={{ 
                     fontSize: '18px', 
@@ -150,16 +111,13 @@ function SearchResultsPage({ searchTerm = "Temizlik Şirketi", onBack, onService
                   }}>{result.name}</h5>
                   
                   <div style={{ display: 'flex', alignItems: 'center' }}>
-                    {/* Rating number */}
                     <div style={{ 
                       fontSize: '18px', 
                       fontWeight: '500',
                       marginRight: '6px' 
                     }}>{result.rating}</div>
                     
-                    {/* Stars and review count in one line */}
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                      {/* Gold stars */}
                       {[...Array(Math.floor(result.rating))].map((_, i) => (
                         <i 
                           key={i} 
@@ -171,7 +129,6 @@ function SearchResultsPage({ searchTerm = "Temizlik Şirketi", onBack, onService
                           }}
                         ></i>
                       ))}
-                      {/* Gray stars */}
                       {[...Array(5 - Math.floor(result.rating))].map((_, i) => (
                         <i 
                           key={i} 
@@ -184,7 +141,6 @@ function SearchResultsPage({ searchTerm = "Temizlik Şirketi", onBack, onService
                         ></i>
                       ))}
                       
-                      {/* Review count */}
                       <div style={{ 
                         color: '#007BFF', 
                         fontSize: '14px',
@@ -195,9 +151,7 @@ function SearchResultsPage({ searchTerm = "Temizlik Şirketi", onBack, onService
                 </div>
               </div>
               
-              {/* Bottom row: Message button and price */}
               <div className="d-flex justify-content-between align-items-center mt-2">
-                {/* Message button */}
                 <button 
                   style={messageButtonStyle} 
                   onClick={(e) => handleMessageClick(e, result.id)}
@@ -206,7 +160,6 @@ function SearchResultsPage({ searchTerm = "Temizlik Şirketi", onBack, onService
                   <span style={messageTextStyle}>Mesaj At</span>
                 </button>
                 
-                {/* Price information */}
                 <div>
                   <div className="d-flex align-items-center">
                     <span style={{ 

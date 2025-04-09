@@ -1,14 +1,12 @@
 import React from 'react';
 
 function TaskCard({ title, description, dueDate, priority, status, category }) {
-  // Priority badge classes
   const priorityBadgeClass = {
     high: 'priority-high',
     medium: 'priority-medium',
     low: 'priority-low',
   };
 
-  // Status badge classes
   const statusBadgeClass = {
     completed: 'status-completed',
     'in-progress': 'status-in-progress',

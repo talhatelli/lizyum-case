@@ -1,46 +1,7 @@
 import React from 'react';
 import TaskCard from './TaskCard';
 import { colors } from '../utils/colors';
-
-// Mock data for tasks
-const mockTasks = [
-  {
-    id: 1,
-    title: 'Design UI for mobile app',
-    description: 'Create wireframes and mockups for the new mobile application',
-    dueDate: '2023-05-15',
-    priority: 'high',
-    status: 'in-progress',
-    category: 'Design'
-  },
-  {
-    id: 2,
-    title: 'Implement login functionality',
-    description: 'Develop user authentication and authorization system',
-    dueDate: '2023-05-10',
-    priority: 'medium',
-    status: 'pending',
-    category: 'Development'
-  },
-  {
-    id: 3,
-    title: 'Test payment gateway',
-    description: 'Verify that payment processing works correctly',
-    dueDate: '2023-05-20',
-    priority: 'low',
-    status: 'completed',
-    category: 'Testing'
-  },
-  {
-    id: 4,
-    title: 'Update user documentation',
-    description: 'Revise user guide with new feature descriptions',
-    dueDate: '2023-05-25',
-    priority: 'medium',
-    status: 'pending',
-    category: 'Documentation'
-  }
-];
+import { mockTasks } from '../data/mockData';
 
 function TaskList() {
   return (

@@ -7,7 +7,6 @@ function MessagesPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedChat, setSelectedChat] = useState(null);
   
-  // Sample chat data with date grouping
   const chatGroups = [
     {
       date: 'Bugün',
@@ -66,27 +65,22 @@ function MessagesPage() {
     }
   ];
 
-  // Handle chat selection
   const handleChatClick = (chat) => {
     setSelectedChat(chat);
   };
 
-  // Handle back from chat detail
   const handleBackToList = () => {
     setSelectedChat(null);
   };
 
-  // Handle search
   const handleSearch = (term) => {
     setSearchQuery(term);
   };
 
-  // If a chat is selected, show chat detail
   if (selectedChat) {
     return <ChatDetail chat={selectedChat} onBack={handleBackToList} />;
   }
   
-  // Filter chats based on search query
   const filterChats = (chats) => {
     return chats.filter(chat => 
       chat.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -94,7 +88,6 @@ function MessagesPage() {
     );
   };
   
-  // Filter all chat groups
   const filteredChatGroups = chatGroups.map(group => ({
     ...group,
     chats: filterChats(group.chats)
@@ -102,7 +95,6 @@ function MessagesPage() {
 
   return (
     <div className="messages-page d-flex flex-column h-100">
-      {/* Header */}
       <div className="messages-header">
         <Header
           title="Mesajlar"
@@ -111,7 +103,6 @@ function MessagesPage() {
         />
       </div>
       
-      {/* Chat List with Date Grouping */}
       <div className="chat-list flex-grow-1" style={{ overflowY: 'auto' }}>
         {filteredChatGroups.length === 0 ? (
           <div className="text-center py-5">

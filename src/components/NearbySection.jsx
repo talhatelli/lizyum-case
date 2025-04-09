@@ -9,7 +9,6 @@ function NearbySection() {
         </h2>
       </div>
 
-      {/* For simplicity, we don't add real nearby content since none is visible in the screenshot */}
       <div className="nearby-grid">
         <div className="d-flex justify-content-center align-items-center" style={{ height: '60px' }}>
           <p className="text-muted mb-0">Yakındaki hizmetler şu anlık yüklenmiyor</p>

@@ -5,7 +5,6 @@ import ChatMessage from './ChatMessage';
 function ChatDetail({ chat, onBack }) {
   const [newMessage, setNewMessage] = useState('');
   
-  // Sample messages for this conversation
   const messageGroups = [
     {
       date: 'Bugün',
@@ -71,14 +70,11 @@ function ChatDetail({ chat, onBack }) {
 
   const handleSend = () => {
     if (newMessage.trim() === '') return;
-    // Here you would normally send the message to an API
-    // For now we'll just clear the input
     setNewMessage('');
   };
 
   return (
     <div className="chat-detail d-flex flex-column" style={{ height: '100vh', backgroundColor: '#F4F5F6' }}>
-      {/* Chat Header */}
       <div className="chat-header px-3 py-3 d-flex align-items-center bg-white" 
            style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
         <button 
@@ -108,7 +104,6 @@ function ChatDetail({ chat, onBack }) {
         </div>
       </div>
 
-      {/* Chat Messages */}
       <div className="chat-messages p-3 flex-grow-1" style={{ overflowY: 'auto', backgroundColor: '#F4F5F6' }}>
         {messageGroups.map((group, groupIndex) => (
           <div key={groupIndex} className="message-group mb-4">
@@ -127,7 +122,6 @@ function ChatDetail({ chat, onBack }) {
         ))}
       </div>
 
-      {/* Message Input */}
       <div className="message-input p-2 d-flex align-items-center bg-white" style={{ boxShadow: '0 -1px 3px rgba(0,0,0,0.1)' }}>
         <button className="btn border-0 p-1 me-2" style={{ backgroundColor: 'transparent' }}>
           <i className="bi bi-plus-circle fs-5 text-muted"></i>

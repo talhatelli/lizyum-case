@@ -6,7 +6,6 @@ import vectorSvg from '../assets/vector.svg';
 import timeSvg from '../assets/time.svg';
 
 function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" }) {
-  // Styles for the page
   const pageStyles = {
     display: 'flex',
     flexDirection: 'column',
@@ -17,7 +16,6 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     position: 'relative',
   };
 
-  // Styles for the card container
   const cardStyles = {
     width: '100%',
     maxWidth: '375px',
@@ -29,7 +27,6 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     alignItems: 'center',
   };
 
-  // Success checkmark container styles
   const checkContainerStyles = {
     width: '82px',
     height: '82px',
@@ -40,7 +37,6 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     justifyContent: 'center',
   };
 
-  // Title styles
   const titleStyles = {
     fontWeight: '700',
     fontSize: '32px',
@@ -49,7 +45,6 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     color: '#000000',
   };
 
-  // Reservation status container styles - updated to match specs
   const statusContainerStyles = {
     width: 351,
     height: 160,
@@ -65,7 +60,6 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     marginBottom: '24px',
   };
 
-  // Status text styles - updated
   const statusTitleStyles = {
     display: 'flex',
     alignItems: 'center',
@@ -79,7 +73,6 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     marginBottom: '8px',
   };
 
-  // Date text styles - updated
   const dateStyles = {
     display: 'flex',
     alignItems: 'center',
@@ -92,12 +85,10 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     height: 26,
   };
 
-  // Clock icon styles
   const clockIconStyles = {
     marginRight: '8px',
   };
 
-  // Progress tracker container styles
   const progressTrackerStyles = {
     marginTop: '16px',
     width: '100%',
@@ -107,7 +98,6 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     alignItems: 'center',
   };
 
-  // Progress line styles
   const progressLineStyles = {
     position: 'absolute',
     top: '10px',
@@ -118,7 +108,6 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     zIndex: 1,
   };
 
-  // Steps container styles
   const stepsContainerStyles = {
     display: 'flex',
     justifyContent: 'space-around',
@@ -128,7 +117,6 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     marginBottom: '6px',
   };
 
-  // Individual step container styles
   const stepContainerStyles = {
     display: 'flex',
     flexDirection: 'column',
@@ -137,7 +125,6 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     width: '70px',
   };
 
-  // Inactive step circle styles
   const stepCircleInactiveStyles = {
     width: '20px',
     height: '20px',
@@ -150,7 +137,6 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     marginBottom: '4px',
   };
 
-  // Inner circle styles for inactive steps
   const innerCircleStyles = {
     width: '12px',
     height: '12px',
@@ -158,7 +144,6 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     backgroundColor: '#B1B5C3',
   };
 
-  // Active step circle styles
   const stepCircleActiveStyles = {
     width: '20px',
     height: '20px',
@@ -170,17 +155,14 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     marginBottom: '4px',
   };
 
-  // Step label styles
   const stepLabelStyles = {
     fontSize: '14px',
     color: '#363A33',
     textAlign: 'center',
     marginTop: '4px',
     fontWeight: '500',
-
   };
 
-  // Active step label styles
   const stepLabelActiveStyles = {
     fontSize: '14px',
     color: '#363A33',
@@ -189,14 +171,12 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     marginTop: '4px',
   };
 
-  // Checkmark icon styles
   const checkmarkIconStyles = {
     color: 'white',
     width: '12px',
     height: '12px',
   };
 
-  // Button styles
   const buttonStyles = {
     width: '100%',
     padding: '16px',
@@ -210,7 +190,6 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     marginBottom: '12px',
   };
 
-  // Secondary button styles
   const secondaryButtonStyles = {
     width: '100%',
     padding: '16px',
@@ -223,7 +202,6 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     cursor: 'pointer',
   };
 
-  // Close button styles (X in the corner)
   const closeButtonStyles = {
     position: 'absolute',
     top: '16px',
@@ -239,8 +217,7 @@ function ReservationSuccessPage({ onViewDetails, onBackToHome, date = "15 Mart" 
     fontSize: '20px',
     zIndex: 10,
   };
-
-  // Checkmark SVG styles
+  
   const checkmarkStyle = {
     position: 'absolute',
     top: '50%',

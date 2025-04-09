@@ -12,7 +12,6 @@ function Header({ onSearch, placeholder }) {
     }
   };
   
-  // Header için gradient arka plan stili
   const headerGradientStyle = {
     background: 'linear-gradient(to bottom, #AEC8E9, #E5EEFF)',
     width: '100%'
@@ -20,7 +19,6 @@ function Header({ onSearch, placeholder }) {
   
   return (
     <div className="header-container mb-3" style={headerGradientStyle}>
-      {/* Mobile view - Header with greeting and profile */}
       <div className="d-flex justify-content-between align-items-center d-md-none px-3 py-3" style={{ background: 'transparent' }}>
         <div>
           <h1 style={{ 
@@ -45,7 +43,6 @@ function Header({ onSearch, placeholder }) {
         </div>
       </div>
       
-      {/* Mobile view - Search bar */}
       <div className="px-3 pb-3 d-md-none" style={{ background: 'transparent' }}>
         <SearchBar 
           value={searchTerm}
@@ -55,7 +52,6 @@ function Header({ onSearch, placeholder }) {
         />
       </div>
       
-      {/* Desktop view */}
       <div className="d-none d-md-flex flex-column w-100" style={{ background: 'transparent' }}>
         <div className="d-flex align-items-center justify-content-between w-100 py-2 px-3">
           <div className="d-flex align-items-center">
