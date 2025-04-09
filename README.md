@@ -18,7 +18,7 @@ Lizyum is a responsive web application designed to connect users with local serv
 - **Reservation System**: Book services with a simple workflow
 - **Tabbed Navigation**: Easy switching between individual and corporate service options
 
-## 📱 Mobile View Screenshots
+## 📱 Mobile View Screenshots (Samsung Galaxy A51/71)
 <img width="309" alt="Screenshot 2025-04-09 at 22 36 42" src="https://github.com/user-attachments/assets/45d67fb4-1094-4291-9064-0d46a5f95418" />
 <img width="306" alt="Screenshot 2025-04-09 at 22 37 09" src="https://github.com/user-attachments/assets/8a869f64-eb8e-449b-a241-05a3e993617f" />
 <img width="307" alt="Screenshot 2025-04-09 at 22 37 20" src="https://github.com/user-attachments/assets/fae9d519-b068-49a8-8921-7d60939f1191" />
