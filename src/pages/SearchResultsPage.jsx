@@ -99,6 +99,13 @@ function SearchResultsPage({ searchTerm = "Temizlik Şirketi", onBack, onService
     // Handle menu functionality
   };
 
+  // Handle card click to view company details
+  const handleCardClick = (id) => {
+    if (onServiceSelect) {
+      onServiceSelect(id);
+    }
+  };
+
   return (
     <div className="search-results-page">
       <Header onSearch={() => {}} placeholder={searchTerm} />
@@ -109,7 +116,7 @@ function SearchResultsPage({ searchTerm = "Temizlik Şirketi", onBack, onService
             key={result.id} 
             className="result-card" 
             style={cardStyle}
-            onClick={() => onServiceSelect && onServiceSelect(result.id)}
+            onClick={() => handleCardClick(result.id)}
           >
             {/* Menu icon */}
             <div style={menuIconStyle} onClick={handleMenuClick}>
