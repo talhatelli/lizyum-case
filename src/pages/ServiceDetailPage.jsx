@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 
 function ServiceDetailPage({ onBack }) {
+  const [activeTab, setActiveTab] = useState('individual');
+  
   // Sample featured services matching the image
   const featuredServices = [
     {
@@ -51,16 +53,48 @@ function ServiceDetailPage({ onBack }) {
               </h2>
               
               <div className="tab-buttons">
-                <div className="btn-group rounded-pill overflow-hidden" role="group">
+                <div className="btn-group rounded-pill" 
+                     style={{ 
+                       overflow: 'hidden', 
+                       border: '1px solid #E6E8EC',
+                       borderRadius: '29px',
+                       boxShadow: 'inset 0px 2px 4px rgba(0, 0, 0, 0.04)',
+                       backgroundColor: '#F9FAFB'
+                     }}>
                   <button 
                     type="button" 
-                    className="btn btn-primary px-3 py-1"
+                    onClick={() => setActiveTab('individual')}
+                    style={{ 
+                      backgroundColor: activeTab === 'individual' ? '#FFFFFF' : 'transparent', 
+                      color: '#3B3E45',
+                      borderRadius: '29px 0 0 29px',
+                      border: 'none',
+                      padding: '10px 24px',
+                      fontWeight: '500',
+                      fontSize: '14px',
+                      boxShadow: activeTab === 'individual' ? '0px 2px 4px rgba(0, 0, 0, 0.06)' : 'none',
+                      position: 'relative',
+                      zIndex: activeTab === 'individual' ? 2 : 1
+                    }}
                   >
                     Bireysel
                   </button>
                   <button 
                     type="button" 
-                    className="btn btn-light px-3 py-1"
+                    onClick={() => setActiveTab('corporate')}
+                    style={{ 
+                      backgroundColor: activeTab === 'corporate' ? '#FFFFFF' : 'transparent', 
+                      color: '#3B3E45',
+                      borderRadius: '0 29px 29px 0',
+                      border: 'none',
+                      borderLeft: activeTab === 'corporate' ? 'none' : '1px solid #E6E8EC',
+                      padding: '10px 24px',
+                      fontWeight: '500',
+                      fontSize: '14px',
+                      boxShadow: activeTab === 'corporate' ? '0px 2px 4px rgba(0, 0, 0, 0.06)' : 'none',
+                      position: 'relative',
+                      zIndex: activeTab === 'corporate' ? 2 : 1
+                    }}
                   >
                     Kurumsal
                   </button>
@@ -72,35 +106,41 @@ function ServiceDetailPage({ onBack }) {
           {/* Horizontal scrollable services */}
           <div className="d-flex overflow-auto pb-3 hide-scrollbar px-3" 
                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {featuredServices.map(service => (
-              <div 
-                key={service.id} 
-                className="me-3" 
-                style={{ 
-                  minWidth: '275px', 
-                  maxWidth: '275px',
-                  flexShrink: 0 
-                }}
-              >
-                <div className="featured-card position-relative rounded-4 overflow-hidden shadow-sm">
-                  <img 
-                    src={service.image} 
-                    alt={service.title} 
-                    className="w-100" 
-                    style={{ height: '170px', objectFit: 'cover' }}
-                  />
-                  <div className="featured-overlay position-absolute bottom-0 start-0 w-100 p-3 text-white"
-                       style={{ background: 'linear-gradient(transparent, rgba(0,0,0,0.7))' }}>
-                    <p className="mb-1 small">{service.price}</p>
-                    <h5 className="mb-0 fs-5 fw-bold">{service.title}</h5>
-                  </div>
-                  <div className="arrow-icon position-absolute bottom-3 end-3 bg-white rounded-circle d-flex justify-content-center align-items-center"
-                       style={{ width: '32px', height: '32px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-                    <i className="bi bi-arrow-right"></i>
+            {/* Filter services based on active tab */}
+            {featuredServices
+              .filter(service => 
+                (activeTab === 'individual' && service.id <= 2) || 
+                (activeTab === 'corporate' && service.id > 2)
+              )
+              .map(service => (
+                <div 
+                  key={service.id} 
+                  className="me-3" 
+                  style={{ 
+                    minWidth: '275px', 
+                    maxWidth: '275px',
+                    flexShrink: 0 
+                  }}
+                >
+                  <div className="featured-card position-relative rounded-4 overflow-hidden shadow-sm">
+                    <img 
+                      src={service.image} 
+                      alt={service.title} 
+                      className="w-100" 
+                      style={{ height: '170px', objectFit: 'cover' }}
+                    />
+                    <div className="featured-overlay position-absolute bottom-0 start-0 w-100 p-3 text-white"
+                         style={{ background: 'linear-gradient(transparent, rgba(0,0,0,0.7))' }}>
+                      <p className="mb-1 small">{service.price}</p>
+                      <h5 className="mb-0 fs-5 fw-bold">{service.title}</h5>
+                    </div>
+                    <div className="arrow-icon position-absolute bottom-3 end-3 bg-white rounded-circle d-flex justify-content-center align-items-center"
+                         style={{ width: '32px', height: '32px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+                      <i className="bi bi-arrow-right"></i>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </section>
         

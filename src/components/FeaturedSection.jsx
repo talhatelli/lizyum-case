@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import arrowIcon from '../assets/arrow.svg';
 
 function FeaturedSection({ searchTerm = '', onServiceSelect }) {
   const [activeTab, setActiveTab] = useState('individual');
@@ -60,18 +61,67 @@ function FeaturedSection({ searchTerm = '', onServiceSelect }) {
         </h2>
         
         <div className="tab-buttons">
-          <div className="btn-group rounded-pill overflow-hidden" role="group">
+          <div style={{ 
+            width: '154px',
+            height: '40px',
+            borderRadius: '10px',
+            borderRightWidth: '1px',
+            borderLeftWidth: '1px',
+            borderTopWidth: '1px',
+            borderBottomWidth: '1px',
+            borderStyle: 'solid',
+            borderColor: '#E6E8EC',
+            background: 'linear-gradient(90deg, #E5EEFF 0%, #FFFFFF 27%, #E6EFFF 63%, #FFFFFF 95%)',
+            boxShadow: 'inset 0px 0px 4px 0px rgba(0, 0, 0, 0.25)',
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            padding: '2px 4px'
+          }}>
             <button 
               type="button" 
-              className={`btn ${activeTab === 'individual' ? 'btn-primary' : 'btn-light'} px-3 py-1`}
               onClick={() => setActiveTab('individual')}
+              style={{ 
+                width: '65px',
+                height: '36px',
+                borderRadius: '10px',
+                backgroundColor: activeTab === 'individual' ? '#FFFFFF' : 'transparent',
+                border: activeTab === 'individual' ? '0.5px solid #E6E8EC' : 'none',
+                padding: '0 10px',
+                fontSize: '13px',
+                color: '#3B3E45',
+                fontWeight: '500',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: activeTab === 'individual' ? '0px 2px 4px rgba(0, 0, 0, 0.06)' : 'none',
+                position: 'relative',
+                zIndex: activeTab === 'individual' ? 2 : 1
+              }}
             >
               Bireysel
             </button>
             <button 
               type="button" 
-              className={`btn ${activeTab === 'corporate' ? 'btn-primary' : 'btn-light'} px-3 py-1`}
               onClick={() => setActiveTab('corporate')}
+              style={{ 
+                width: '65px',
+                height: '36px',
+                borderRadius: '10px',
+                backgroundColor: activeTab === 'corporate' ? '#FFFFFF' : 'transparent',
+                border: activeTab === 'corporate' ? '0.5px solid #E6E8EC' : 'none',
+                padding: '0 10px',
+                fontSize: '13px',
+                color: '#3B3E45',
+                fontWeight: '500',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: activeTab === 'corporate' ? '0px 2px 4px rgba(0, 0, 0, 0.06)' : 'none',
+                position: 'relative',
+                zIndex: activeTab === 'corporate' ? 2 : 1,
+                marginLeft: 'auto'
+              }}
             >
               Kurumsal
             </button>
@@ -121,14 +171,37 @@ function FeaturedSection({ searchTerm = '', onServiceSelect }) {
                     className="w-100" 
                     style={{ height: '175px', objectFit: 'cover' }}
                   />
-                  <div className="featured-overlay position-absolute bottom-0 start-0 w-100 p-3 text-white"
-                       style={{ background: 'linear-gradient(transparent, rgba(0,0,0,0.7))' }}>
+                  <div 
+                    className="featured-overlay position-relative position-absolute bottom-0 start-0 text-white"
+                    style={{ 
+                      width: 'calc(100% - 8px)', 
+                      height: '74px', 
+                      borderRadius: '10px',
+                      background: '#FFFFFF33',
+                      backdropFilter: 'blur(8px)',
+                      margin: '4px',
+                      padding: '12px'
+                    }}
+                  >
                     <p className="mb-1 small">{item.price}</p>
                     <h5 className="mb-0 fs-5 fw-bold">{item.title}</h5>
-                  </div>
-                  <div className="arrow-icon position-absolute bottom-3 end-3 bg-white rounded-circle d-flex justify-content-center align-items-center"
-                       style={{ width: '32px', height: '32px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-                    <i className="bi bi-arrow-right"></i>
+                    
+                    <div 
+                      className="arrow-icon position-absolute d-flex justify-content-center align-items-center"
+                      style={{ 
+                        width: '36px', 
+                        height: '36px', 
+                        top: '0px', 
+                        right: '0px',
+                        borderRadius: '90px',
+                        backgroundColor: '#FFFFFF',
+                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                        transform: 'rotate(-12.5deg)',
+                        margin: '4px'
+                      }}
+                    >
+                      <img src={arrowIcon} alt="Arrow" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -150,14 +223,36 @@ function FeaturedSection({ searchTerm = '', onServiceSelect }) {
                     className="w-100" 
                     style={{ height: '200px', objectFit: 'cover' }}
                   />
-                  <div className="featured-overlay position-absolute bottom-0 start-0 w-100 p-3 text-white"
-                       style={{ background: 'linear-gradient(transparent, rgba(0,0,0,0.7))' }}>
+                  <div 
+                    className="featured-overlay position-relative position-absolute bottom-0 start-0 text-white"
+                    style={{ 
+                      width: 'calc(100% - 8px)', 
+                      height: '74px', 
+                      borderRadius: '10px',
+                      background: '#FFFFFF33',
+                      backdropFilter: 'blur(8px)',
+                      margin: '4px',
+                      padding: '12px'
+                    }}
+                  >
                     <p className="mb-1 small">{item.price}</p>
                     <h5 className="mb-0 fs-5 fw-bold">{item.title}</h5>
-                  </div>
-                  <div className="arrow-icon position-absolute bottom-3 end-3 bg-white rounded-circle d-flex justify-content-center align-items-center"
-                       style={{ width: '32px', height: '32px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-                    <i className="bi bi-arrow-right"></i>
+                    
+                    <div 
+                      className="arrow-icon position-absolute d-flex justify-content-center align-items-center"
+                      style={{ 
+                        width: '34px', 
+                        height: '34px', 
+                        top: '0px', 
+                        right: '0px',
+                        borderRadius: '90px',
+                        backgroundColor: '#FFFFFF',
+                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                        transform: 'rotate(135deg)'
+                      }}
+                    >
+                      <img src={arrowIcon} alt="Arrow" />
+                    </div>
                   </div>
                 </div>
               </div>

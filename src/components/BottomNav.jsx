@@ -18,13 +18,26 @@ function BottomNav({ activeTab, setActiveTab }) {
   return (
     <div className="bottom-nav-container w-100">
       {/* Mobile Navigation */}
-      <div className="bg-white shadow-lg border-top d-md-none" style={{ borderTopLeftRadius: '15px', borderTopRightRadius: '15px' }}>
-        <div className="d-flex justify-content-around align-items-center py-2">
+      <div className="bg-white shadow-lg d-md-none" style={{ 
+        borderRadius: '10px', 
+        borderTop: '1px solid #E1E2E2',
+        margin: '12px',
+        overflow: 'hidden'
+      }}>
+        <div className="d-flex justify-content-between align-items-center py-2" style={{ 
+          paddingLeft: '16px', 
+          paddingRight: '16px'
+        }}>
           {tabs.map(tab => (
             <button 
               key={tab.id}
               className="d-flex flex-column align-items-center justify-content-center border-0 bg-transparent"
               onClick={() => setActiveTab(tab.id)}
+              style={{ 
+                flex: '1 1 0',
+                minWidth: 0,
+                maxWidth: '20%'
+              }}
             >
               <img 
                 src={tab.icon} 
@@ -36,7 +49,13 @@ function BottomNav({ activeTab, setActiveTab }) {
                   filter: activeTab === tab.id ? hexToFilter(colors.activeTab) : 'none'
                 }} 
               />
-              <span className="small mt-1" style={{ color: activeTab === tab.id ? colors.activeTab : colors.inactiveTab }}>{tab.name}</span>
+              <span className="small mt-1 text-center" style={{ 
+                color: activeTab === tab.id ? colors.activeTab : colors.inactiveTab,
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                width: '100%'
+              }}>{tab.name}</span>
               {activeTab === tab.id && <div className="blue-indicator mt-1" style={{ width: '20px', height: '3px', backgroundColor: colors.activeTab, borderRadius: '2px' }}></div>}
             </button>
           ))}

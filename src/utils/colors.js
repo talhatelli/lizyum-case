@@ -16,6 +16,7 @@ export const colors = {
   // Tab colors
   activeTab: '#2483F0',
   inactiveTab: '#6A6C6A',
+  backgroundColor: '#F4F5F6',
   
   // Add more colors as needed for the application
 };

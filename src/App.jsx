@@ -8,10 +8,12 @@ import TasksPage from './pages/TasksPage'
 import SettingsPage from './pages/SettingsPage'
 import CategoryPage from './pages/CategoryPage'
 import ServiceDetailPage from './pages/ServiceDetailPage'
+import SearchResultsPage from './pages/SearchResultsPage'
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [activePage, setActivePage] = useState('home');
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Handle service detail navigation
   const handleServiceDetail = (serviceId) => {
@@ -23,11 +25,25 @@ function App() {
     setActivePage('home');
   };
 
+  // Handle search functionality
+  const handleSearch = (term) => {
+    if (term.trim()) {
+      setSearchTerm(term);
+      setActivePage('searchResults');
+    }
+  };
+
   // Content for the body section based on active tab and page
   const renderBodyContent = () => {
     // First check if we're in a specific page that overrides the tab navigation
     if (activePage === 'serviceDetail') {
       return <ServiceDetailPage onBack={handleBackToHome} />;
+    } else if (activePage === 'searchResults') {
+      return <SearchResultsPage 
+              searchTerm={searchTerm} 
+              onBack={handleBackToHome} 
+              onServiceSelect={handleServiceDetail}
+            />;
     }
 
     // Otherwise use the tab-based navigation
@@ -42,7 +58,7 @@ function App() {
         return <CategoryPage />;
       case 'home':
       default:
-        return <HomePage onServiceSelect={handleServiceDetail} />;
+        return <HomePage onServiceSelect={handleServiceDetail} onSearch={handleSearch} />;
     }
   };
 
