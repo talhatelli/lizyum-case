@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import { getSearchResultsData } from '../data/searchResultsData';
 import { getSearchResultsStyles } from '../styles/searchResultsStyles';
 
-function SearchResultsPage({ searchTerm = "Temizlik Şirketi", onBack, onServiceSelect }) {
+function SearchResultsPage({ searchTerm = "Temizlik Şirketi", onServiceSelect }) {
   const data = getSearchResultsData(searchTerm);
   const styles = getSearchResultsStyles();
 
@@ -51,7 +51,7 @@ function SearchResultsPage({ searchTerm = "Temizlik Şirketi", onBack, onService
                   <h5 style={styles.companyName}>{result.name}</h5>
                   
                   <div style={styles.ratingWrapper}>
-                    <div style={styles.ratingValue}>{result.rating}</div>
+                    <div style={styles.ratingValue}>{Math.floor(result.rating)}</div>
                     
                     <div style={styles.starsContainer}>
                       {[...Array(Math.floor(result.rating))].map((_, i) => (
@@ -61,7 +61,13 @@ function SearchResultsPage({ searchTerm = "Temizlik Şirketi", onBack, onService
                           style={styles.starFilled}
                         ></i>
                       ))}
-                      {[...Array(5 - Math.floor(result.rating))].map((_, i) => (
+                      {result.rating % 1 >= 0.5 && (
+                        <i 
+                          className="bi bi-star-half"
+                          style={styles.starFilled}
+                        ></i>
+                      )}
+                      {[...Array(5 - Math.ceil(result.rating))].map((_, i) => (
                         <i 
                           key={i} 
                           className="bi bi-star"

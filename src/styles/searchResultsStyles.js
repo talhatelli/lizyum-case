@@ -75,36 +75,43 @@ export const getSearchResultsStyles = () => {
     
     ratingWrapper: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+      width: '216px',
+      height: '20px'
     },
     
     ratingValue: {
-      fontSize: '18px',
-      fontWeight: '500',
+      fontWeight: 400,
+      fontSize: '12px',
+      lineHeight: '20px',
+      color: 'var(--color-text-dont-edit-text-quarterary, #667085)',
       marginRight: '6px'
     },
     
     starsContainer: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+      height: '20px'
     },
     
     starFilled: {
       color: colors.starFilled,
-      fontSize: '15px',
-      marginRight: '1px'
+      fontSize: '14px',
+      marginRight: '2px'
     },
     
     starEmpty: {
       color: colors.starEmptyColor,
-      fontSize: '15px',
-      marginRight: '1px'
+      fontSize: '14px',
+      marginRight: '2px'
     },
     
     reviewCount: {
       color: colors.starReviewColor,
-      fontSize: '14px',
-      marginLeft: '6px'
+      fontWeight: 400,
+      fontSize: '12px',
+      lineHeight: '20px',
+      marginLeft: '4px'
     },
     
     footer: {

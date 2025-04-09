@@ -156,7 +156,7 @@ export const searchResults = [
   {
     id: 1,
     name: "Lorem Ipsum Temizlik",
-    rating: 4.0,
+    rating: 4.2,
     reviewCount: 200,
     price: "₺",
     amount: "500",
@@ -166,7 +166,7 @@ export const searchResults = [
   {
     id: 2,
     name: "Lorem Ipsum Temizlik",
-    rating: 4.0,
+    rating: 4.3,
     reviewCount: 200,
     price: "₺",
     amount: "500",

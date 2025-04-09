@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
 import messageSentIcon from '../assets/icon-park-solid_message-sent.svg';
 import gridAddIcon from '../assets/gridicons_add.svg';
 import arrowBackIcon from '../assets/arrow-back.svg';
 import { colors } from '../utils/colors';
 import { getCompanyData } from '../data/companyData';
 import { getCompanyDetailStyles } from '../styles/companyDetailStyles';
+import { getSearchResultsStyles } from '../styles/searchResultsStyles';
 
 function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
   const [activeTab, setActiveTab] = useState('company');
@@ -26,6 +26,7 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
   
   const company = getCompanyData(companyId);
   const styles = getCompanyDetailStyles(isWebView);
+  const searchResultStyles = getSearchResultsStyles();
 
   const handleReservation = () => {
     if (onReservationSuccess) {
@@ -294,14 +295,31 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
           />
           <div>
             <h1 style={{ fontSize: '28px', fontWeight: 'bold', color: colors.companyDetailText, marginBottom: '4px' }}>{company.name}</h1>
-            <div className="d-flex align-items-center">
-              <div style={{ fontSize: '20px', fontWeight: '500', marginRight: '8px' }}>{company.rating}</div>
-              <div className="d-flex me-1">
-                {Array(5).fill(0).map((_, index) => (
-                  <span key={index} style={{ color: index < Math.floor(company.rating) ? colors.starFilled : colors.starEmpty, fontSize: '20px' }}>★</span>
+            <div className="d-flex align-items-center" style={searchResultStyles.ratingWrapper}>
+              <div style={searchResultStyles.ratingValue}>{Math.floor(company.rating)}</div>
+              <div style={searchResultStyles.starsContainer}>
+                {[...Array(Math.floor(company.rating))].map((_, i) => (
+                  <i 
+                    key={i} 
+                    className="bi bi-star-fill"
+                    style={searchResultStyles.starFilled}
+                  ></i>
                 ))}
+                {company.rating % 1 >= 0.5 && (
+                  <i 
+                    className="bi bi-star-half"
+                    style={searchResultStyles.starFilled}
+                  ></i>
+                )}
+                {[...Array(5 - Math.ceil(company.rating))].map((_, i) => (
+                  <i 
+                    key={i} 
+                    className="bi bi-star"
+                    style={searchResultStyles.starEmpty}
+                  ></i>
+                ))}
+                <div style={searchResultStyles.reviewCount}>({company.reviewCount} değerlendirme)</div>
               </div>
-              <span style={{ color: colors.companyDetailLink, fontSize: '16px' }}>({company.reviewCount} değerlendirme)</span>
             </div>
           </div>
         </div>
@@ -353,21 +371,31 @@ function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
                   color: colors.companyDetailText
                 }}>{company.name}</h2>
                 
-                <div className="d-flex align-items-center">
-                  <div style={{ 
-                    fontSize: '18px', 
-                    fontWeight: '500',
-                    marginRight: '6px',
-                    color: colors.companyDetailText
-                  }}>{company.rating}</div>
-                  
-                  <div className="d-flex me-1">
-                    {Array(5).fill(0).map((_, index) => (
-                      <span key={index} style={{ color: index < Math.floor(company.rating) ? colors.starFilled : colors.starEmpty, fontSize: '18px' }}>★</span>
+                <div className="d-flex align-items-center" style={searchResultStyles.ratingWrapper}>
+                  <div style={searchResultStyles.ratingValue}>{Math.floor(company.rating)}</div>
+                  <div style={searchResultStyles.starsContainer}>
+                    {[...Array(Math.floor(company.rating))].map((_, i) => (
+                      <i 
+                        key={i} 
+                        className="bi bi-star-fill"
+                        style={searchResultStyles.starFilled}
+                      ></i>
                     ))}
+                    {company.rating % 1 >= 0.5 && (
+                      <i 
+                        className="bi bi-star-half"
+                        style={searchResultStyles.starFilled}
+                      ></i>
+                    )}
+                    {[...Array(5 - Math.ceil(company.rating))].map((_, i) => (
+                      <i 
+                        key={i} 
+                        className="bi bi-star"
+                        style={searchResultStyles.starEmpty}
+                      ></i>
+                    ))}
+                    <div style={searchResultStyles.reviewCount}>({company.reviewCount} değerlendirme)</div>
                   </div>
-                  
-                  <span style={{ color: colors.companyDetailLink, fontSize: '14px' }}>({company.reviewCount} değerlendirme)</span>
                 </div>
                 
                 <div style={styles.badge}>
