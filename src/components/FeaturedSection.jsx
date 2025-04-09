@@ -6,8 +6,17 @@ function FeaturedSection({ searchTerm = '', onServiceSelect }) {
 
   const featuredItems = [
     {
+      id: 2,
+      image: 'https://s3-alpha-sig.figma.com/img/f50e/d396/8acc9477cf1e875deee44ed90f9f5d25?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=D19emqvdiGU8Zj1Rfg1rzu6MKGLor27feKPx4~VzL5yFuR6A2UAppoDRwWdd~-D4eccnp2nh3TI81t5rfrjJ2wepMrthj0Z7IhCl8zyYGcuA7RYFOdwLDDscn3KNL~LD9uj5cH2Z7njGNFRL3vMtrBMiavwJSMJrQ6laHDH4RPAnd9OY36Ha~D9EnWbLXlxuaJjtRmcip2492atnS7Ak~Pq4TFYJxGCwKTc10BoC1xbPi1ZZHXOlhjujgyHNUtOEJMN2I3ny5ShYpzesX5O5rFI3ziRSatapsPpAMPx6tkOZiuhyFQhPjKqV8QZp6R~8sKHmD4-t~UZClp4InlLhCQ__',
+      price: '200 TL\'den başlayan fiyatlar...',
+      title: 'Mutfak Servisi',
+      category: 'individual'
+    },
+
+
+    {
       id: 1,
-      image: 'https://images.unsplash.com/photo-1581783898377-1c85bf937427?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+      image: 'https://s3-alpha-sig.figma.com/img/1105/47b2/740fad2ea4836b5b0831b6f3b8cb9504?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=tSi6wMA-l4~OC8Og~GAMrq1q7gwupQyXDggompbMBO7iGiCt64SvIh0sr94w3XW~WHs4gTxFZEYxK4lplSTTPKcF2MmwZoP7OCV5zx3VNgujODAJ5sTF0Un6pEVAuw2--C8-AXi4Y0zOzt2c57LxBKpp16DXz9V3K0UOn8~LnP1v0EaoJ2ZKsfdk-7Gjske75CDpXOVTRI3uz-3-etSduH~XC69MSlLhY2ynf4mILKHBetW9Ty6pmIkTl0m7WU9SX1xzN6geDEH9pBade0PPGIBga84~Qzo16vIIP7XFmAU3l2eNWxEWYRyRg4YDaOOKDoBlA7iSqQV5KCvzYbQX9w__',
       price: '200 TL\'den başlayan fiyatlar...',
       title: 'Tamirat Servisi',
       category: 'individual'

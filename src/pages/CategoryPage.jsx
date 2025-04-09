@@ -43,7 +43,7 @@ function CategoryPage() {
     <div className="category-page">
       <Header title="Kategoriler" placeholder="Kategori ara" />
       
-      <div className="container-fluid px-3 py-3">
+      <div className="container-fluid px-3 py-3" style={{backgroundColor: "#F4F5F6"}}>
         <h2 className="section-title fw-bold mb-3">
           <span className="text-primary fw-bold fs-4">#</span> <span className="fs-4">Tüm Kategoriler</span>
         </h2>

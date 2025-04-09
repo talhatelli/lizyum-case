@@ -6,7 +6,7 @@ function SettingsPage() {
     <div className="settings-page">
       <Header title="Ayarlar" />
       
-      <div className="container-fluid px-3 py-3">
+      <div className="container-fluid px-3 py-3" style={{backgroundColor: "#F4F5F6", height: "100vh"}}>
         <h2 className="fs-4 fw-bold mb-4">Ayarlar</h2>
         
         <div className="list-group rounded-4 mb-4">

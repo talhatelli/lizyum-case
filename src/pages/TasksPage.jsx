@@ -7,7 +7,7 @@ function TasksPage() {
     <div className="tasks-page">
       <Header title="Tasks" placeholder="Search tasks..." />
       
-      <div className="container-fluid">
+      <div>
         <TaskList />
       </div>
     </div>

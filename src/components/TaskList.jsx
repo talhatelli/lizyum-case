@@ -1,5 +1,6 @@
 import React from 'react';
 import TaskCard from './TaskCard';
+import { colors } from '../utils/colors';
 
 // Mock data for tasks
 const mockTasks = [
@@ -43,7 +44,7 @@ const mockTasks = [
 
 function TaskList() {
   return (
-    <div className="p-3">
+    <div className="p-3" style={{backgroundColor: "#F4F5F6"}}>
       <div className="mb-4">
         <h2 className="fs-3 fw-bold mb-2">Your Tasks</h2>
         <p className="text-secondary">You have {mockTasks.length} tasks for this period</p>

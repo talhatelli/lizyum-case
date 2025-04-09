@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import cleaningImage from '../assets/Image/clean-image.jpeg';
 import messageSentIcon from '../assets/icon-park-solid_message-sent.svg';
@@ -7,8 +7,23 @@ import arrowBackIcon from '../assets/arrow-back.svg';
 import ribbonIcon from '../assets/gaming-Ribbon-First--Streamline-Ultimate.svg';
 import { colors } from '../utils/colors';
 
-function CompanyDetailPage({ onBack, companyId }) {
+function CompanyDetailPage({ onBack, companyId, onReservationSuccess }) {
   const [activeTab, setActiveTab] = useState('company'); // Default active tab
+  const [isWebView, setIsWebView] = useState(false);
+  
+  // Responsive screen detection
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsWebView(window.innerWidth > 768);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => {
+      window.removeEventListener('resize', checkScreenSize);
+    };
+  }, []);
   
   // Mock data for the company details
   const company = {
@@ -68,7 +83,14 @@ function CompanyDetailPage({ onBack, companyId }) {
     width: '100%',
     position: 'relative',
     paddingTop: '16px',
-    paddingBottom: '16px'
+    paddingBottom: '16px',
+    ...(isWebView && {
+      height: '240px',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center'
+    })
   };
 
   // Geri buton stil
@@ -85,19 +107,31 @@ function CompanyDetailPage({ onBack, companyId }) {
     backdropFilter: 'blur(10px)',
     border: 'none',
     cursor: 'pointer',
-    zIndex: 10
+    zIndex: 10,
+    ...(isWebView && {
+      position: 'absolute',
+      top: '20px',
+      left: '20px',
+      marginLeft: 0
+    })
   };
 
   // Card stili
   const cardStyle = {
-    width: '351px',
+    width: isWebView ? '600px' : '351px',
     maxWidth: '100%',
     margin: '0 auto',
     borderRadius: '10px',
     borderWidth: '1px',
     padding: '16px 10px',
     background: 'rgba(255, 255, 255, 0.5)',
-    border: '1px solid #E9EAEC'
+    border: '1px solid #E9EAEC',
+    ...(isWebView && {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: '24px'
+    })
   };
 
   // Badge stili
@@ -126,6 +160,11 @@ function CompanyDetailPage({ onBack, companyId }) {
     borderLeftWidth: '1px',
     height: '40px',
     gap: '2px',
+    ...(isWebView && {
+      width: '80%',
+      maxWidth: '800px',
+      margin: '0 auto'
+    })
   };
   
   // Active tab style
@@ -171,7 +210,7 @@ function CompanyDetailPage({ onBack, companyId }) {
     padding: '16px',
     border: '1px solid #E6E8EC',
     marginBottom: '16px',
-    background: '#FFFFFF80 50%'
+    background: '#FFFFFF80 50%',
   };
   
   // Services card style
@@ -186,7 +225,12 @@ function CompanyDetailPage({ onBack, companyId }) {
     paddingLeft: '10px',
     gap: '10px',
     background: '#FFFFFF80 50%',
-    border: '1px solid #E9EAEC'
+    border: '1px solid #E9EAEC',
+    ...(isWebView && {
+      width: '100%',
+      height: 'auto',
+      minHeight: '200px'
+    })
   };
   
   // About card style - using the same dimensions and styling
@@ -202,7 +246,12 @@ function CompanyDetailPage({ onBack, companyId }) {
     gap: '10px',
     background: '#FFFFFF80 50%',
     border: '1px solid #E9EAEC',
-    marginTop: '16px'
+    marginTop: '16px',
+    ...(isWebView && {
+      width: '100%',
+      height: 'auto',
+      minHeight: '150px'
+    })
   };
   
   // Service item style
@@ -215,11 +264,157 @@ function CompanyDetailPage({ onBack, companyId }) {
     color: '#333',
     marginBottom: '8px',
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    ...(isWebView && {
+      width: 'auto',
+      fontSize: '14px'
+    })
+  };
+
+  // Web content wrapper style
+  const webContentStyle = {
+    width: '100%',
+    padding: '24px 0',
+    backgroundColor: colors.backgroundColor
+  };
+
+  const webMainContentStyle = {
+    gridColumn: 'span 8',
+  };
+
+  const webSidebarStyle = {
+    gridColumn: 'span 4',
+  };
+
+  // Function to handle reservation submission
+  const handleReservation = () => {
+    // Here we would normally process the reservation with an API call
+    // For now, we'll just trigger the success page
+    if (onReservationSuccess) {
+      onReservationSuccess();
+    }
   };
 
   // Render tab content based on active tab
   const renderTabContent = () => {
+    // For web view - combined layout
+    if (isWebView) {
+      return (
+        <div style={webContentStyle}>
+          <div style={webMainContentStyle}>
+            {activeTab === 'services' ? (
+              <div className="services-content py-3">
+                <h3 className="mb-3">Hizmetler</h3>
+                <div style={servicesCardStyle}>
+                  <ul className="list-unstyled">
+                    {company.services.map((service, index) => (
+                      <li key={index} className="mb-3 d-flex align-items-center">
+                        <span className="me-2">•</span>
+                        {service}
+                      </li>
+                    ))}
+                  </ul>
+                  <button 
+                    className="btn btn-primary w-100 mt-4"
+                    onClick={handleReservation}
+                  >
+                    Randevu Oluştur
+                  </button>
+                </div>
+              </div>
+            ) : activeTab === 'comments' ? (
+              <div className="comments-content py-3">
+                <h3 className="mb-3">Yorumlar</h3>
+                <div className="card p-3">
+                  <p className="text-muted">Henüz yorum bulunmamaktadır.</p>
+                </div>
+              </div>
+            ) : activeTab === 'badges' ? (
+              <div className="badges-content py-3">
+                <h3 className="mb-3">Rozet Kataloğu</h3>
+                <div className="card p-3">
+                  <p className="text-muted">Henüz rozet bulunmamaktadır.</p>
+                </div>
+              </div>
+            ) : (
+              // Default company tab - alt alta düzenlenmiş
+              <div className="company-info-content py-3">
+                {/* İletişim kartı ilk sırada */}
+                <div style={contactCardStyle} className="mb-4">
+                  <div className="d-flex align-items-center mb-3">
+                    <div style={{ width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <i className="bi bi-geo-alt" style={{ fontSize: '24px', color: '#667085' }}></i>
+                    </div>
+                    <span style={{ marginLeft: '8px', color: '#333', fontSize: '16px' }}>
+                      {company.address}
+                    </span>
+                  </div>
+                
+                  <div className="d-flex align-items-center mb-3">
+                    <div style={{ width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <i className="bi bi-question-circle" style={{ fontSize: '24px', color: '#667085' }}></i>
+                    </div>
+                    <a href={`mailto:${company.email}`} style={{ marginLeft: '8px', color: '#2483F0', fontSize: '16px', textDecoration: 'none' }}>
+                      {company.email}
+                    </a>
+                  </div>
+                
+                  <div className="d-flex gap-3 mt-3">
+                    <button style={actionButtonStyle} className="w-100">
+                      <img src={messageSentIcon} alt="Message" className="me-2" style={{ width: '20px', height: '20px' }} />
+                      <span style={buttonTextStyle}>Mesaj At</span>
+                    </button>
+                  
+                    <button style={actionButtonStyle} className="w-100" onClick={handleReservation}>
+                      <img src={gridAddIcon} alt="Add" className="me-2" style={{ width: '20px', height: '20px' }} />
+                      <span style={buttonTextStyle}>Randevu Al</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Hizmetler ikinci sırada */}
+                <div style={servicesCardStyle} className="mb-4">
+                  <h3 className="mb-3">Hizmetler</h3>
+                  <div>
+                    {company.services.map((service, index) => (
+                      <div key={index} style={serviceItemStyle} className="mb-3">
+                        <span className="me-2" style={{fontSize: '16px', color: '#4387FF'}}>•</span>
+                        {service}
+                      </div>
+                    ))}
+                    <a href="#" 
+                      onClick={() => setActiveTab('services')}
+                      style={{ 
+                        display: 'flex',
+                        alignItems: 'center',   
+                        color: '#2483F0', 
+                        textDecoration: 'none',
+                        fontSize: '14px',
+                        marginTop: '8px'
+                      }}
+                    >
+                      Tüm hizmetleri gör &gt;
+                    </a>
+                  </div>
+                </div>
+
+                {/* Hakkında en son sırada */}
+                <div style={aboutCardStyle}>
+                  <h3 className="mb-3">Hakkında</h3>
+                  <p style={{
+                    fontSize: '14px',
+                    lineHeight: '1.6',
+                    color: '#363A33'
+                  }}>{company.about}</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+    
+    // Mobile view - switchable tabs
     switch(activeTab) {
       case 'company':
         return (
@@ -255,7 +450,10 @@ function CompanyDetailPage({ onBack, companyId }) {
                 </button>
                 
                 {/* Appointment button */}
-                <button style={actionButtonStyle}>
+                <button 
+                  style={actionButtonStyle}
+                  onClick={handleReservation}
+                >
                   <img src={gridAddIcon} alt="Add" className="me-2" style={{ width: '20px', height: '20px' }} />
                   <span style={buttonTextStyle}>Randevu Al</span>
                 </button>
@@ -264,7 +462,7 @@ function CompanyDetailPage({ onBack, companyId }) {
             
             {/* Company Info Section */}
             <section className="company-info-section mb-3">
-                          <div style={servicesCardStyle}>
+              <div style={servicesCardStyle}>
                 <h3 style={{ 
                   display: 'flex',
                   alignItems: 'center', 
@@ -355,6 +553,44 @@ function CompanyDetailPage({ onBack, companyId }) {
     }
   };
 
+  // Web view company header info
+  const renderWebCompanyInfo = () => {
+    return (
+      <div className="d-flex justify-content-between align-items-center" style={{ width: '100%' }}>
+        <div className="d-flex align-items-center">
+          <img 
+            src={company.image} 
+            alt={company.name} 
+            style={{ 
+              width: '60px', 
+              height: '60px', 
+              borderRadius: '50%',
+              objectFit: 'cover',
+              marginRight: '16px'
+            }} 
+          />
+          <div>
+            <h1 style={{ fontSize: '28px', fontWeight: 'bold', color: '#333', marginBottom: '4px' }}>{company.name}</h1>
+            <div className="d-flex align-items-center">
+              <div style={{ fontSize: '20px', fontWeight: '500', marginRight: '8px' }}>{company.rating}</div>
+              <div className="d-flex me-1">
+                {Array(5).fill(0).map((_, index) => (
+                  <span key={index} style={{ color: index < Math.floor(company.rating) ? '#FFBA0A' : '#D9D9D9', fontSize: '20px' }}>★</span>
+                ))}
+              </div>
+              <span style={{ color: '#2483F0', fontSize: '16px' }}>({company.reviewCount} değerlendirme)</span>
+            </div>
+          </div>
+        </div>
+        
+        <div style={badgeStyle}>
+          <img src={ribbonIcon} alt="Badge" width="20" height="20" className="me-2" />
+          <span style={badgeTextStyle}>{company.badge}</span>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="company-detail-page">
       {/* Custom Gradient Header */}
@@ -368,88 +604,70 @@ function CompanyDetailPage({ onBack, companyId }) {
           <img src={arrowBackIcon} alt="Geri" width="24" height="24" />
         </button>
         
-        {/* Company Profile in Header */}
-        <div style={cardStyle}>
-          <div className="d-flex">
-            {/* Company image */}
-            <div className="me-3" style={{ flexShrink: 0 }}>
-              <img 
-                src={company.image} 
-                alt={company.name} 
-                style={{ 
-                  width: '42px', 
-                  height: '42px', 
-                  borderRadius: '50%',
-                  objectFit: 'cover'
-                }} 
-              />
-            </div>
-            
-            {/* Company name and rating */}
-            <div>
-              <h2 style={{ 
-                fontSize: '24px', 
-                fontWeight: 'bold',
-                marginBottom: '4px',
-                color: '#333'
-              }}>{company.name}</h2>
-              
-              <div className="d-flex align-items-center">
-                {/* Rating number */}
-                <div style={{ 
-                  fontSize: '18px', 
-                  fontWeight: '500',
-                  marginRight: '6px',
-                  color: '#333'
-                }}>{company.rating}</div>
-                
-                {/* Stars */}
-                <div className="d-flex align-items-center">
-                  {/* Gold stars */}
-                  {[...Array(Math.floor(company.rating))].map((_, i) => (
-                    <i 
-                      key={i} 
-                      className="bi bi-star-fill"
-                      style={{ 
-                        color: '#FFC107', 
-                        fontSize: '15px',
-                        marginRight: '1px'
-                      }}
-                    ></i>
-                  ))}
-                  {/* Gray stars */}
-                  {[...Array(5 - Math.floor(company.rating))].map((_, i) => (
-                    <i 
-                      key={i} 
-                      className="bi bi-star"
-                      style={{ 
-                        color: '#B0B7C3', 
-                        fontSize: '15px',
-                        marginRight: '1px'
-                      }}
-                    ></i>
-                  ))}
-                  
-                  {/* Review count */}
-                  <div style={{ 
-                    color: '#007BFF', 
-                    fontSize: '14px',
-                    marginLeft: '6px'
-                  }}>({company.reviewCount} değerlendirme)</div>
-                </div>
+        {isWebView ? (
+          /* Web View Company Profile */
+          <div style={{ width: '80%', maxWidth: '1100px', padding: '0 24px' }}>
+            {renderWebCompanyInfo()}
+          </div>
+        ) : (
+          /* Mobile View Company Profile in Header */
+          <div style={cardStyle}>
+            <div className="d-flex">
+              {/* Company image */}
+              <div className="me-3" style={{ flexShrink: 0 }}>
+                <img 
+                  src={company.image} 
+                  alt={company.name} 
+                  style={{ 
+                    width: '42px', 
+                    height: '42px', 
+                    borderRadius: '50%',
+                    objectFit: 'cover'
+                  }} 
+                />
               </div>
               
-              {/* Badge - Mahallenin Muhtarı */}
-              <div style={badgeStyle}>
-                <img src={ribbonIcon} alt="Rozet" className="me-2" width="24" height="24" />
-                <span style={badgeTextStyle}>{company.badge}</span>
+              {/* Company name and rating */}
+              <div>
+                <h2 style={{ 
+                  fontSize: '24px', 
+                  fontWeight: 'bold',
+                  marginBottom: '4px',
+                  color: '#333'
+                }}>{company.name}</h2>
+                
+                <div className="d-flex align-items-center">
+                  {/* Rating number */}
+                  <div style={{ 
+                    fontSize: '18px', 
+                    fontWeight: '500',
+                    marginRight: '6px',
+                    color: '#333'
+                  }}>{company.rating}</div>
+                  
+                  {/* Stars */}
+                  <div className="d-flex me-1">
+                    {Array(5).fill(0).map((_, index) => (
+                      <span key={index} style={{ color: index < Math.floor(company.rating) ? '#FFBA0A' : '#D9D9D9', fontSize: '18px' }}>★</span>
+                    ))}
+                  </div>
+                  
+                  {/* Review count */}
+                  <span style={{ color: '#2483F0', fontSize: '14px' }}>({company.reviewCount} değerlendirme)</span>
+                </div>
+                
+                {/* Badge */}
+                <div style={badgeStyle}>
+                  <img src={ribbonIcon} alt="Badge" width="16" height="16" className="me-1" />
+                  <span style={badgeTextStyle}>{company.badge}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
-        
-      {/* Tab Navigation Bar */}
+      
+      {/* Tabs Navigation */}
       <div style={{backgroundColor: colors.backgroundColor}}>
         <div style={tabContainerStyle}>
           <div 

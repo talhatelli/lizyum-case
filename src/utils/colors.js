@@ -58,4 +58,7 @@ export const hexToFilter = (hexColor) => {
   }
   
   return `invert(${Math.round(sepia * 100)}%) sepia(${Math.round(saturation)}%) saturate(${Math.round(saturation * 10)}%) hue-rotate(${hue}deg) brightness(${Math.round(r * 100)}%) contrast(${Math.round(g * 100)}%)`;
-}; 
+};
+
+// Default export for compatibility with existing imports
+export default colors; 

@@ -10,6 +10,7 @@ import CategoryPage from './pages/CategoryPage'
 import ServiceDetailPage from './pages/ServiceDetailPage'
 import SearchResultsPage from './pages/SearchResultsPage'
 import CompanyDetailPage from './pages/CompanyDetailPage'
+import ReservationSuccessPage from './pages/ReservationSuccessPage'
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');
@@ -37,6 +38,16 @@ function App() {
   const handleBackToSearch = () => {
     setActivePage('searchResults');
   };
+  
+  // Handle reservation success
+  const handleReservationSuccess = () => {
+    setActivePage('reservationSuccess');
+  };
+  
+  // Handle view reservation details
+  const handleViewReservationDetails = () => {
+    setActivePage('companyDetail');
+  };
 
   // Handle search functionality
   const handleSearch = (term) => {
@@ -54,13 +65,19 @@ function App() {
     } else if (activePage === 'companyDetail') {
       return <CompanyDetailPage 
               companyId={selectedCompanyId} 
-              onBack={handleBackToSearch} 
+              onBack={handleBackToSearch}
+              onReservationSuccess={handleReservationSuccess}
             />;
     } else if (activePage === 'searchResults') {
       return <SearchResultsPage 
               searchTerm={searchTerm} 
               onBack={handleBackToHome} 
               onServiceSelect={handleCompanyDetail}
+            />;
+    } else if (activePage === 'reservationSuccess') {
+      return <ReservationSuccessPage
+              onViewDetails={handleViewReservationDetails}
+              onBackToHome={handleBackToHome}
             />;
     }
 
@@ -84,15 +101,17 @@ function App() {
     <div className="app-wrapper d-flex flex-column vh-100 vw-100 p-0 m-0" style={{ overflow: 'hidden' }}>
       {/* BODY */}
       <main className="app-body flex-grow-1" style={{ 
-        backgroundColor: activeTab === 'messages' ? '#F4F5F6' : colors.lightBlue, 
+        backgroundColor: activeTab === 'messages' ? '#F4F5F6' : 
+                        activePage === 'reservationSuccess' ? '#FFFFFF' : 
+                        colors.lightBlue, 
         overflow: 'auto'
       }}>
         {renderBodyContent()}
       </main>
       
       {/* FOOTER */}
-      {/* Hide BottomNav when on CompanyDetailPage */}
-      {activePage !== 'companyDetail' && (
+      {/* Hide BottomNav when on CompanyDetailPage or ReservationSuccessPage */}
+      {(activePage !== 'companyDetail' && activePage !== 'reservationSuccess') && (
         <footer className="app-footer">
           <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
         </footer>
